@@ -1,0 +1,32 @@
+[global_config]
+  window_state = fullscreen
+  title_transmit_fg_color = "#dbccc2"
+  title_transmit_bg_color = "#191512"
+  title_receive_fg_color = "#e9e1dc"
+  title_inactive_fg_color = "#dbccc2"
+  title_inactive_bg_color = "#26a269"
+  inactive_color_offset = 0.8083832335329342
+  invert_search = True
+[keybindings]
+[profiles]
+  [[default]]
+    background_color = "#110801"
+    background_darkness = 1.0
+    cursor_color = "#dbccc2"
+    font = Dank Mono 11
+    foreground_color = "#53cd38"
+    scrollback_infinite = True
+    palette = "#000000:#3d3846:#9a9996:#50453e:#706359:#988679:#c6af9e:#ffffff:#e97ead:#dd9b54:#efbbcf:#e66100:#97ba50:#ecff00:#e97ead:#d1bbe9"
+    use_system_font = False
+    bold_is_bright = True
+    background_image = /home/kn/Downloads/303639.jpg
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]

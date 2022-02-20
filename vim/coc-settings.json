@@ -1,0 +1,31 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "javascript",
+    "typescript",
+    "json",
+    "html",
+    "xml",
+    "yaml",
+    "yml",
+    "md"
+  ],
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.enable": true,
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.floatConfig": {
+    "highlight": "CocFloating",
+    "borderhighlight": "CocFloating",
+    "shadow": true,
+    "border": true
+  },
+  "codeLens.position": "eol",
+  "diagnostic.infoSign": "",
+  "diagnostic.warningSign": "",
+  "diagnostic.errorSign": "",
+  "diagnostic.enableSign": false,
+  "javascript.suggest.autoImports": true,
+  "typescript.suggest.autoImports": true
+}
