@@ -13,13 +13,13 @@
     background_color = "#110801"
     background_darkness = 1.0
     cursor_color = "#dbccc2"
-    font = Dank Mono 11
+    font = Dank Mono, Dejavu Sans Mono, FontAwesome 11
     foreground_color = "#53cd38"
+    scrollbar_position = hidden
     scrollback_infinite = True
     palette = "#000000:#3d3846:#9a9996:#50453e:#706359:#988679:#c6af9e:#ffffff:#e97ead:#dd9b54:#efbbcf:#e66100:#97ba50:#ecff00:#e97ead:#d1bbe9"
     use_system_font = False
     bold_is_bright = True
-    background_image = /home/kn/Downloads/303639.jpg
 [layouts]
   [[default]]
     [[[child1]]]
