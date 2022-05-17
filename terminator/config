@@ -3,17 +3,17 @@
   title_transmit_fg_color = "#dbccc2"
   title_transmit_bg_color = "#191512"
   title_receive_fg_color = "#e9e1dc"
-  title_inactive_fg_color = "#dbccc2"
-  title_inactive_bg_color = "#26a269"
+  title_inactive_fg_color = "#090909"
+  title_inactive_bg_color = "#e8e8e8"
   inactive_color_offset = 0.8083832335329342
   invert_search = True
 [keybindings]
 [profiles]
   [[default]]
-    background_color = "#110801"
+    background_color = "#090909"
     background_darkness = 1.0
     cursor_color = "#dbccc2"
-    font = Dank Mono, Dejavu Sans Mono, FontAwesome 11
+    font = Dank Mono 11
     foreground_color = "#53cd38"
     scrollbar_position = hidden
     scrollback_infinite = True
