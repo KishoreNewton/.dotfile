@@ -28,9 +28,12 @@ set mouse=a
 set relativenumber
 set exrc
 set background=dark
+set clipboard=unnamedplus
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
+set autoread | au CursorHold * checktime | call feedkeys("lh")
+set guifont=Source\ Code\ Pro\ for\ Powerline:h15:cANSI
 set guicursor=
 
 highlight Comment cterm=italic gui=italic term=italic
@@ -74,18 +77,19 @@ Plug 'mbbill/undotree'
 Plug 'ayu-theme/ayu-vim'
 Plug 'elzr/vim-json'
 Plug 'google/vim-jsonnet'
+Plug 'powerline/powerline-fonts'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'junegunn/fzf'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'github/copilot.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'junegunn/fzf.vim'
 "Plug 'neoclide/coc.nvim'"
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-
 " (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf'
 Plug 'iamcco/diagnostic-languageserver'
@@ -124,7 +128,7 @@ let g:vim_json_syntax_conceal = 0
 " let g:ale_fix_on_save = 1 " run deno fmt when saving a buffer"
 
 nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
+"nnoremap <leader>j :wincmd j<CR>"
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
