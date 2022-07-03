@@ -1,10 +1,9 @@
 syntax on
 
 set scrolloff=8
-"set termguicolors"     " enable true colors support
+set termguicolors     " enable true colors support
 "let ayucolor="dark""   " for dark version of theme
-"set timeoutlen=1000
-
+set timeoutlen=1000
 set ttimeoutlen=0
 set number
 set relativenumber
@@ -29,23 +28,67 @@ set relativenumber
 set exrc
 set background=dark
 set clipboard=unnamedplus
+set guifont=Dank\ Mono
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
   \,sm:block-blinkwait175-blinkoff150-blinkon175
+set clipboard=unnamedplus
 set autoread | au CursorHold * checktime | call feedkeys("lh")
-set guifont=Source\ Code\ Pro\ for\ Powerline:h15:cANSI
+set laststatus=0
 set guicursor=
 
 highlight Comment cterm=italic gui=italic term=italic
 highlight Statement cterm=italic gui=italic term=italic
 highlight Type  cterm=italic gui=italic term=italic
-highlight PreProc cterm=bold  gui=bold  term=bold
+highlight PreProc cterm=bold  gui=bold  term=bold guifg=#A7D676
 highlight Special  cterm=bold  gui=bold  term=bold
 highlight Underlined  cterm=underline  gui=underline  term=underline
 highlight CocErrorFloat ctermfg=black guifg=white
 highlight CocError ctermfg=white guifg=black
 highlight CocWarning ctermfg=white guifg=black
 highlight CocInfo ctermfg=white guifg=black
+highlight Pmenu ctermbg=gray guibg=#101820
+highlight Pmenu ctermbg=gray guifg=#FEE715
+highlight PmenuSel ctermbg=gray guibg=#FEE715
+highlight PmenuSel ctermbg=gray guifg=#101820
+
+" Color Scheme
+highlight Normal guifg=#53cd38
+highlight bold guifg=#000000 
+highlight Comment guifg=#D1D1D1 gui=italic
+highlight String guifg=#FFF066 
+highlight Character guifg=#000000 
+highlight Number guifg=#EFF0EB gui=bold
+highlight Boolean guifg=#86E3CE
+highlight Float guifg=#EFF0EB gui=italic
+highlight Function guifg=#9DE0AD
+highlight Conditional guifg=#CFF4D2 gui=italic
+highlight Repeat guifg=#CCABD8 gui=italic
+highlight Label guifg=#D3E7EE gui=italic
+highlight Operator guifg=#FFDCA2 gui=bold
+highlight Keyword guifg=#758EB7 gui=italic
+highlight Identifier guifg=#FA897B
+" Change Later 
+highlight Exception guifg=#AAB6FB gui=bold
+highlight Visual term=reverse cterm=reverse guibg=#2C6975
+" highlight Include guifg=#000000 gui=italic
+" highlight Define guifg=#000000 gui=italic
+" highlight Macro guifg=#000000 gui=italic
+" highlight PreCondit guifg=#000000
+" highlight Typedef guifg=#000000 gui=italic
+" highlight SpecialChar guifg=#000000 gui=bold
+" highlight Tag guifg=#000000 gui=italic
+" highlight Delimiter guifg=#000000 gui=bold
+" highlight Debug guifg=#000000 gui=italic
+
+highlight StorageClass guifg=#FAA7B8 gui=italic
+highlight Structure guifg=#FB7BBE gui=italic
+
+highlight Special guifg=#FF9CDA gui=italic
+highlight SpecialComment guifg=#9B9B9B gui=bold
+
+
+"highlight Error guifg=#E73213 gui=bold
 
 hi SpellBad ctermfg=black 
 hi SpellCap ctermfg=black  
@@ -55,11 +98,14 @@ hi SpellRareUnderlined ctermfg=black cterm=underline
 hi SpellLocalUnderlined ctermfg=black cterm=underline
 hi SpellCapUnderlined ctermfg=black cterm=underline
 hi SpellBadUnderlined ctermfg=black cterm=underline
+hi NonText guifg=#C9BBC8 gui=bold
+
+hi LineNr guifg=#FDE4E3
 
 call plug#begin('~/.config/nvim/pack')
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'"
+"Plug 'vim-airline/vim-airline-themes'"
 Plug 'burntsushi/ripgrep'
 Plug 'ms-jpq/coq_nvim'
 Plug 'jameshiew/nvim-magic'
@@ -77,7 +123,7 @@ Plug 'mbbill/undotree'
 Plug 'ayu-theme/ayu-vim'
 Plug 'elzr/vim-json'
 Plug 'google/vim-jsonnet'
-Plug 'powerline/powerline-fonts'
+"Plug 'powerline/powerline-fonts'"
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'junegunn/fzf'
 Plug 'hail2u/vim-css3-syntax'
@@ -106,10 +152,10 @@ if executable('rg')
 endif
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:airline#extensions#coc#enabled = 1
-let airline#extensions#coc#error_symbol = 'E:'
-let airline#extensions#coc#warning_symbol = 'W:'
-let g:airline#extensions#coc#show_coc_status = 1
+"let g:airline#extensions#coc#enabled = 1"
+"let airline#extensions#coc#error_symbol = 'E:'"
+"let airline#extensions#coc#warning_symbol = 'W:'"
+"let g:airline#extensions#coc#show_coc_status = 1"
 let mapleader = " "
 let g:ctrlp_use_caching = 0
 let g:NERDTreeWinPos = "right"
