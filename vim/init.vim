@@ -27,6 +27,7 @@ set mouse=a
 set relativenumber
 set exrc
 set background=dark
+set signcolumn=number
 set clipboard=unnamedplus
 set guifont=Dank\ Mono
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
@@ -80,6 +81,7 @@ highlight Visual term=reverse cterm=reverse guibg=#2C6975
 " highlight Tag guifg=#000000 gui=italic
 " highlight Delimiter guifg=#000000 gui=bold
 " highlight Debug guifg=#000000 gui=italic
+highlight clear SignColumn 
 
 highlight StorageClass guifg=#FAA7B8 gui=italic
 highlight Structure guifg=#FB7BBE gui=italic
@@ -106,6 +108,7 @@ call plug#begin('~/.config/nvim/pack')
 
 "Plug 'vim-airline/vim-airline'"
 "Plug 'vim-airline/vim-airline-themes'"
+Plug 'rust-lang/rust.vim'
 Plug 'burntsushi/ripgrep'
 Plug 'ms-jpq/coq_nvim'
 Plug 'jameshiew/nvim-magic'
@@ -117,12 +120,13 @@ Plug 'vim-utils/vim-man'
 Plug 'mattn/emmet-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install'  }
 Plug 'lyuts/vim-rtags'
-Plug 'preservim/nerdtree'
+" Plug 'preservim/nerdtree'"
 Plug 'git@github.com:kien/ctrlp.vim.git'
 Plug 'mbbill/undotree'
 Plug 'ayu-theme/ayu-vim'
 Plug 'elzr/vim-json'
 Plug 'google/vim-jsonnet'
+Plug 'rust-lang/rust.vim'
 "Plug 'powerline/powerline-fonts'"
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'junegunn/fzf'
@@ -140,6 +144,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'junegunn/fzf'
 Plug 'iamcco/diagnostic-languageserver'
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'puremourning/vimspector'
 "Plug 'dense-analysis/ale'"
 "Plug 'fannheyward/coc-deno'"
 "Plug 'dense-analysis/ale'"
@@ -151,11 +156,8 @@ if executable('rg')
   let g:rg_derive_root='true'
 endif
 
+let g:coc_snippet_next = '<tab>'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-"let g:airline#extensions#coc#enabled = 1"
-"let airline#extensions#coc#error_symbol = 'E:'"
-"let airline#extensions#coc#warning_symbol = 'W:'"
-"let g:airline#extensions#coc#show_coc_status = 1"
 let mapleader = " "
 let g:ctrlp_use_caching = 0
 let g:NERDTreeWinPos = "right"
@@ -164,9 +166,7 @@ let g:minimap_block_filetypes = ['fugitive', 'nerdtree', 'tagbar']
 let g:minimap_git_colors = 1
 let g:minimap_highlight_search = 1
 let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ] }
-let g:LanguageClient_serverCommands = {
-\ 'rust': ['rust-analyzer'],
-\ }
+imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 let g:vim_json_syntax_conceal = 0
@@ -174,7 +174,6 @@ let g:vim_json_syntax_conceal = 0
 " let g:ale_fix_on_save = 1 " run deno fmt when saving a buffer"
 
 nnoremap <leader>h :wincmd h<CR>
-"nnoremap <leader>j :wincmd j<CR>"
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
@@ -183,10 +182,13 @@ nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 
 nmap <F6> :NERDTreeToggle<CR>
-nmap gr <Plug>(ale_rename)
-nmap gR <Plug>(ale_find_reference)
-nmap gd <Plug>(ale_go_to_definition)
-nmap gD <Plug>(ale_go_to_type_definition)
+"nmap gr <Plug>(ale_rename)"
+"nmap gR <Plug>(ale_find_reference)"
+"nmap gd <Plug>(ale_go_to_definition)"
+"nmap gD <Plug>(ale_go_to_type_definition)"
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 "colorscheme slate"
 
@@ -196,14 +198,29 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
 " use <c-space>for trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
 " use <c-space>for trigger completion
 inoremap <silent><expr> <NUL> coc#refresh()
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
+
+function! CheckBackSpace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+\ coc#pum#visible() ? coc#pum#next(1):
+\ CheckBackSpace() ? "\<Tab>" :
+\ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+		\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
