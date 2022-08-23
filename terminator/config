@@ -1,25 +1,31 @@
 [global_config]
   window_state = fullscreen
   borderless = True
+  extra_styling = False
   title_at_bottom = True
-  title_transmit_fg_color = "#dbccc2"
-  title_transmit_bg_color = "#000000"
-  title_receive_fg_color = "#e9e1dc"
-  title_inactive_fg_color = "#090909"
-  title_inactive_bg_color = "#e8e8e8"
+  title_transmit_fg_color = "#e8e8e8"
+  title_transmit_bg_color = "#090909"
+  title_receive_fg_color = "#ff4e50"
+  title_receive_bg_color = "#363636"
+  title_inactive_fg_color = "#594f4f"
+  title_inactive_bg_color = "#090909"
   inactive_color_offset = 0.8083832335329342
   enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, Logger, CustomCommandsMenu, TestPlugin, TerminalShot, ActivityWatch, InactivityWatch, MavenPluginURLHandler
   invert_search = True
 [keybindings]
+  broadcast_off = <Alt>o
+  broadcast_group = <Alt>g
+  broadcast_all = <Alt>a
 [profiles]
   [[default]]
     background_color = "#090909"
+    background_darkness = 0.01
     cursor_color = "#dbccc2"
-    font = Dank Mono 11
+    font = Dank Mono 10
     foreground_color = "#53cd38"
     scrollbar_position = hidden
     scrollback_infinite = True
-    palette = "#000000:#3d3846:#9a9996:#50453e:#706359:#988679:#c6af9e:#ffffff:#e97ead:#dd9b54:#efbbcf:#e66100:#97ba50:#ecff00:#e97ead:#d1bbe9"
+    palette = "#ffffff:#3d3846:#9a9996:#50453e:#706359:#988679:#c6af9e:#a2f6ff:#e97ead:#dd9b54:#efbbcf:#e66100:#97ba50:#ecff00:#fa7268:#d1bbe9"
     use_system_font = False
     bold_is_bright = True
 [layouts]

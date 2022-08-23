@@ -102,9 +102,9 @@ hi SpellLocalUnderlined ctermfg=black cterm=underline
 hi SpellCapUnderlined ctermfg=black cterm=underline
 hi SpellBadUnderlined ctermfg=black cterm=underline
 hi NonText guifg=#C9BBC8 gui=bold
-hi TabLine      guifg=#05386B guibg=#FC4445 ctermfg=white ctermbg=238 
+hi TabLine      guibg=#355C7D ctermfg=NONE ctermbg=NONE cterm=italic
 hi TabLineSel   guifg=#05386B guibg=#5CDB95 gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
-hi TabLineFill  guifg=#999 guibg=#222  ctermfg=254 ctermbg=238 
+hi TabLineFill  guifg=#111111 guibg=#000000  ctermfg=254 ctermbg=238 
 hi LineNr guifg=#FDE4E3
 
 call plug#begin('~/.config/nvim/pack')
