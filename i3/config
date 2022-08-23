@@ -229,3 +229,8 @@ smart_borders no_gaps
 
 # Hide edge borders only if there is one window with no gaps
 hide_edge_borders smart_no_gaps
+
+bindsym $mod+Ctrl+Right resize grow width 3px or 3ppt
+bindsym $mod+Ctrl+Up resize grow height 3px or 3ppt
+bindsym $mod+Ctrl+Down resize shrink height 3px or 3ppt
+bindsym $mod+Ctrl+Left resize shrink width 3px or 3ppt
