@@ -36,7 +36,7 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
   \,sm:block-blinkwait175-blinkoff150-blinkon175
 set clipboard=unnamedplus
 set autoread | au CursorHold * checktime | call feedkeys("lh")
-set laststatus=0
+set laststatus=2
 set guicursor=
 
 highlight Comment cterm=italic gui=italic term=italic
@@ -83,10 +83,8 @@ highlight Visual term=reverse cterm=reverse guibg=#2C6975
 " highlight Delimiter guifg=#000000 gui=bold
 " highlight Debug guifg=#000000 gui=italic
 highlight clear SignColumn 
-
 highlight StorageClass guifg=#FAA7B8 gui=italic
 highlight Structure guifg=#FB7BBE gui=italic
-
 highlight Special guifg=#FF9CDA gui=italic
 highlight SpecialComment guifg=#9B9B9B gui=bold
 
@@ -106,6 +104,8 @@ hi TabLine      guibg=#355C7D ctermfg=NONE ctermbg=NONE cterm=italic
 hi TabLineSel   guifg=#05386B guibg=#5CDB95 gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
 hi TabLineFill  guifg=#111111 guibg=#000000  ctermfg=254 ctermbg=238 
 hi LineNr guifg=#FDE4E3
+hi StatusLine guifg=#FDE4E3 guibg=#000000 ctermfg=NONE ctermbg=NONE cterm=italic
+hi StatusLineNC guifg=#FF5733 
 
 call plug#begin('~/.config/nvim/pack')
 
