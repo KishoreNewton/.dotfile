@@ -45,16 +45,12 @@ highlight Type  cterm=italic gui=italic term=italic
 highlight PreProc cterm=bold  gui=bold  term=bold guifg=#A7D676
 highlight Special  cterm=bold  gui=bold  term=bold
 highlight Underlined  cterm=underline  gui=underline  term=underline
-highlight CocErrorFloat ctermfg=black guifg=white
-highlight CocError ctermfg=white guifg=black
-highlight CocWarning ctermfg=white guifg=black
-highlight CocInfo ctermfg=white guifg=black
 highlight Pmenu ctermbg=gray guibg=#101820
 highlight Pmenu ctermbg=gray guifg=#FEE715
-highlight PmenuSel ctermbg=gray guibg=#000000
+highlight PmenuSel ctermbg=gray guibg=#FFF38C
 highlight PmenuSel ctermbg=gray guifg=#101820
+highlight netrwDir guifg=#37E2D5
 
-" Color Scheme
 highlight Normal guifg=#53cd38
 highlight bold guifg=#000000 
 highlight Comment guifg=#D1D1D1 gui=italic
@@ -87,8 +83,6 @@ highlight StorageClass guifg=#FAA7B8 gui=italic
 highlight Structure guifg=#FB7BBE gui=italic
 highlight Special guifg=#FF9CDA gui=italic
 highlight SpecialComment guifg=#9B9B9B gui=bold
-
-
 "highlight Error guifg=#E73213 gui=bold
 
 hi SpellBad ctermfg=black 
@@ -110,58 +104,27 @@ hi WinSeparator guibg=None
 
 call plug#begin('~/.config/nvim/pack')
 
-"Plug 'vim-airline/vim-airline'"
-"Plug 'vim-airline/vim-airline-themes'"
-Plug 'rust-lang/rust.vim'
-Plug 'burntsushi/ripgrep'
-Plug 'ms-jpq/coq_nvim'
-Plug 'jameshiew/nvim-magic'
-Plug 'folke/trouble.nvim'
-Plug 'pangloss/vim-javascript'    " JavaScript support
-Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-utils/vim-man'
-Plug 'mattn/emmet-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install'  }
-Plug 'lyuts/vim-rtags'
-Plug 'git@github.com:kien/ctrlp.vim.git'
 Plug 'mbbill/undotree'
-Plug 'ayu-theme/ayu-vim'
-Plug 'elzr/vim-json'
 Plug 'google/vim-jsonnet'
-Plug 'rust-lang/rust.vim'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'junegunn/fzf'
-Plug 'hail2u/vim-css3-syntax'
 Plug 'github/copilot.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-Plug 'junegunn/fzf.vim'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'junegunn/fzf'
-Plug 'iamcco/diagnostic-languageserver'
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-Plug 'puremourning/vimspector'
-Plug 'lewis6991/gitsigns.nvim'
+Plug 'wbthomason/packer.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'L3MON4D3/LuaSnip'
 
 call plug#end()
 
-if executable('rg')
-  let g:rg_derive_root='true'
-endif
-
-let g:coc_snippet_next = '<tab>'
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let mapleader = " "
-let g:ctrlp_use_caching = 0
-let g:NERDTreeWinPos = "right"
-let g:minimap_auto_start = 1
-let g:minimap_block_filetypes = ['fugitive', 'nerdtree', 'tagbar']
-let g:minimap_git_colors = 1
-let g:minimap_highlight_search = 1
 let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ] }
 imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
@@ -172,41 +135,6 @@ nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <Leader>ps :Rg<SPACE>
-nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 
-nmap <F6> :NERDTreeToggle<CR>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gD <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-inoremap <silent><expr> <NUL> coc#refresh()
-
-
-function! CheckBackSpace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-\ coc#pum#visible() ? coc#pum#next(1):
-\ CheckBackSpace() ? "\<Tab>" :
-\ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
-		\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-
+" require plugin configs
+lua require('kishorenewton')
