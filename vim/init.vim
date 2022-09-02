@@ -130,6 +130,8 @@ imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
 imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 let g:vim_json_syntax_conceal = 0
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>k :wincmd k<CR>
