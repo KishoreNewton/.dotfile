@@ -138,5 +138,4 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 
-" require plugin configs
 lua require('kishorenewton')
