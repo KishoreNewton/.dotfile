@@ -1,4 +1,5 @@
 syntax on
+filetype plugin on
 
 set scrolloff=8
 set termguicolors     " enable true colors support
@@ -9,6 +10,7 @@ set relativenumber
 set noerrorbells
 set tabstop=2 softtabstop=2
 set shiftwidth=2
+set omnifunc=syntaxcomplete#Complete
 set expandtab
 set smartindent
 set nu
@@ -49,7 +51,7 @@ highlight Pmenu ctermbg=gray guibg=#101820
 highlight Pmenu ctermbg=gray guifg=#FEE715
 highlight PmenuSel ctermbg=gray guibg=#FFF38C
 highlight PmenuSel ctermbg=gray guifg=#101820
-highlight netrwDir guifg=#37E2D5
+highlight netrwDir guifg=#FF7F50	
 
 highlight Normal guifg=#53cd38
 highlight bold guifg=#000000 
@@ -105,7 +107,6 @@ hi WinSeparator guibg=None
 call plug#begin('~/.config/nvim/pack')
 
 Plug 'tpope/vim-fugitive'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install'  }
 Plug 'mbbill/undotree'
 Plug 'google/vim-jsonnet'
 Plug 'github/copilot.vim'
@@ -120,22 +121,35 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'L3MON4D3/LuaSnip'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let mapleader = " "
 let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ] }
-imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_node_command = "~/.nvm/versions/node/v16.15.0/bin/node"
 let g:copilot_no_tab_map = v:true
 let g:vim_json_syntax_conceal = 0
-let g:prettier#autoformat = 1
-let g:prettier#autoformat_require_pragma = 0
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
+nnoremap gp :silent %!prettier --stdin-filepath %<CR>
 
+imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+
+" nmap <silent> gd <Plug>(lua vim.lsp.buf.declaration())
+" nmap <silent> gD <Plug>(lua vim.lsp.buf.definition())
+" nmap <silent> gr <Plug>(lua vim.lsp.buf.references())
+
+" require plugin configs
 lua require('kishorenewton')
+
+" autocmd BufWritePost * silent! execute '!git add % && git commit -m %' "
+autocmd BufWritePost *.ts silent! execute '!prettier --write %'
+autocmd BufWritePost *.js silent! execute '!prettier --write %'
+
