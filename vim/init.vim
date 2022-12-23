@@ -1,6 +1,8 @@
 syntax on
+syntax enable
 filetype plugin on
 
+set autowriteall
 set scrolloff=8
 set termguicolors     " enable true colors support
 set timeoutlen=1000
@@ -86,6 +88,7 @@ highlight Structure guifg=#FB7BBE gui=italic
 highlight Special guifg=#FF9CDA gui=italic
 highlight SpecialComment guifg=#9B9B9B gui=bold
 "highlight Error guifg=#E73213 gui=bold
+highlight CopilotSuggestion guifg=#d1001c ctermfg=8
 
 hi SpellBad ctermfg=black 
 hi SpellCap ctermfg=black  
@@ -119,19 +122,25 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-Plug 'L3MON4D3/LuaSnip'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'nvim-telescope/telescope.nvim' 
 Plug 'junegunn/fzf.vim'
+Plug 'jbyuki/instant.nvim'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'prettier/vim-prettier'
+Plug 'edluffy/specs.nvim'
+Plug 'tpope/vim-surround'
+Plug 'wbthomason/packer.nvim'
 
 call plug#end()
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let mapleader = " "
 let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ] }
-let g:copilot_node_command = "~/.nvm/versions/node/v16.15.0/bin/node"
+let g:copilot_node_command = "~/.nvm/versions/node/v16.18.0/bin/node"
 let g:copilot_no_tab_map = v:true
 let g:vim_json_syntax_conceal = 0
+let g:instant_username = "kn"
 
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>k :wincmd k<CR>
@@ -150,6 +159,6 @@ imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 lua require('kishorenewton')
 
 " autocmd BufWritePost * silent! execute '!git add % && git commit -m %' "
-autocmd BufWritePost *.ts silent! execute '!prettier --write %'
-autocmd BufWritePost *.js silent! execute '!prettier --write %'
-
+autocmd BufWritePost *.rs silent! execute '!rustfmt %'
+autocmd BufWritePre *.js lua vim.lsp.buf.format { async = true } 
+autocmd BufWritePre *.ts lua vim.lsp.buf.format { async = true } 
