@@ -131,6 +131,8 @@ Plug 'prettier/vim-prettier'
 Plug 'edluffy/specs.nvim'
 Plug 'tpope/vim-surround'
 Plug 'wbthomason/packer.nvim'
+Plug 'ggandor/leap.nvim'
+Plug 'edluffy/hologram.nvim'
 
 call plug#end()
 
