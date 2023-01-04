@@ -53,7 +53,7 @@ local lsp_flags = {
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local lspconfig = require('lspconfig')
-local servers = { 'tsserver', 'rust_analyzer' }
+local servers = { 'tsserver', 'rust_analyzer', 'html' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
