@@ -1,0 +1,168 @@
+syntax on
+syntax enable
+filetype plugin on
+
+set autowriteall
+set scrolloff=8
+set termguicolors     " enable true colors support
+set timeoutlen=1000
+set ttimeoutlen=0
+set number
+set relativenumber
+set noerrorbells
+set tabstop=2 softtabstop=2
+set shiftwidth=2
+set omnifunc=syntaxcomplete#Complete
+set expandtab
+set smartindent
+set nu
+set completeopt+=menuone,noselect,noinsert " don't insert text automatically
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set invnumber
+set nohlsearch
+set belloff=all
+set mouse=a
+set relativenumber
+set exrc
+set modifiable
+set background=dark
+set signcolumn=number
+set clipboard=unnamedplus
+set updatetime=100
+set guifont=Dank\ Mono
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+  \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+  \,sm:block-blinkwait175-blinkoff150-blinkon175
+set clipboard=unnamedplus
+set autoread | au CursorHold * checktime | call feedkeys("lh")
+set laststatus=2
+set guicursor=
+
+highlight Comment cterm=italic gui=italic term=italic
+highlight Statement cterm=italic gui=italic term=italic guifg=#495464
+highlight Type  cterm=italic gui=italic term=italic
+highlight PreProc cterm=bold  gui=bold  term=bold guifg=#A7D676
+highlight Special  cterm=bold  gui=bold  term=bold
+highlight Underlined  cterm=underline  gui=underline  term=underline
+highlight Pmenu ctermbg=gray guibg=#101820
+highlight Pmenu ctermbg=gray guifg=#FEE715
+highlight PmenuSel ctermbg=gray guibg=#FFF38C
+highlight PmenuSel ctermbg=gray guifg=#101820
+highlight netrwDir guifg=#2E8BC0
+
+
+highlight Normal guifg=#53cd38
+highlight bold guifg=#000000 
+highlight Comment guifg=#36454F gui=italic
+highlight String guifg=#100303
+highlight Character guifg=#000000 
+highlight Number guifg=#C490E4 gui=bold
+highlight Boolean guifg=#EA168E
+highlight Float guifg=#C6CFFF gui=italic
+highlight Function guifg=#21BF73
+highlight Conditional guifg=#272343 gui=italic
+highlight Repeat guifg=#CCABD8 gui=italic
+highlight Label guifg=#9C5518 gui=italic
+highlight Operator guifg=#FFDCA2 gui=bold
+highlight Keyword guifg=#758EB7 gui=italic
+highlight Identifier guifg=#FA897B
+" Change Later 
+highlight Exception guifg=#AAB6FB gui=bold
+highlight Visual term=reverse cterm=reverse guibg=#2C6975
+" highlight Include guifg=#000000 gui=italic
+" highlight Define guifg=#000000 gui=italic
+" highlight Macro guifg=#000000 gui=italic
+" highlight PreCondit guifg=#000000
+" highlight Typedef guifg=#000000 gui=italic
+" highlight SpecialChar guifg=#000000 gui=bold
+" highlight Tag guifg=#000000 gui=italic
+" highlight Delimiter guifg=#000000 gui=bold
+" highlight Debug guifg=#000000 gui=italic
+highlight clear SignColumn 
+highlight StorageClass guifg=#FAA7B8 gui=italic
+highlight Structure guifg=#FB7BBE gui=italic
+highlight Special guifg=#BE79DF gui=italic
+highlight SpecialComment guifg=#9B9B9B gui=bold
+"highlight Error guifg=#E73213 gui=bold
+highlight CopilotSuggestion guifg=#d1001c ctermfg=8
+
+hi SpellBad ctermfg=black 
+hi SpellCap ctermfg=black  
+hi SpellLocal ctermfg=black
+hi SpellRare ctermfg=black
+hi SpellRareUnderlined ctermfg=black cterm=underline
+hi SpellLocalUnderlined ctermfg=black cterm=underline
+hi SpellCapUnderlined ctermfg=black cterm=underline
+hi SpellBadUnderlined ctermfg=black cterm=underline
+hi NonText guifg=#C9BBC8 gui=bold
+hi TabLine      guibg=#355C7D ctermfg=NONE ctermbg=NONE cterm=italic
+hi TabLineSel   guifg=#05386B guibg=#5CDB95 gui=bold ctermfg=NONE ctermbg=NONE cterm=bold
+hi TabLineFill  guifg=#111111 guibg=#000000  ctermfg=254 ctermbg=238 
+hi LineNr guifg=#4F81C7
+hi StatusLine guifg=#FDE4E3 guibg=#000000 ctermfg=NONE ctermbg=NONE cterm=italic
+hi StatusLineNC guifg=#FF5733 
+hi WinSeparator guibg=None
+
+call plug#begin('~/.config/nvim/pack')
+
+Plug 'tpope/vim-fugitive'
+Plug 'mbbill/undotree'
+Plug 'google/vim-jsonnet'
+Plug 'github/copilot.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'wbthomason/packer.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim' 
+Plug 'junegunn/fzf.vim'
+Plug 'jbyuki/instant.nvim'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'prettier/vim-prettier'
+Plug 'edluffy/specs.nvim'
+Plug 'tpope/vim-surround'
+Plug 'wbthomason/packer.nvim'
+Plug 'ap/vim-css-color'
+
+call plug#end()
+
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let mapleader = " "
+let g:ycm_semantic_triggers = { 'c': [ 're!\w{2}' ] }
+let g:copilot_node_command = "~/.nvm/versions/node/v16.18.0/bin/node"
+let g:copilot_no_tab_map = v:true
+let g:vim_json_syntax_conceal = 0
+let g:instant_username = "kn"
+
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap gp :silent %!prettier --stdin-filepath %<CR>
+
+imap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+
+" nmap <silent> gd <Plug>(lua vim.lsp.buf.declaration())
+" nmap <silent> gD <Plug>(lua vim.lsp.buf.definition())
+" nmap <silent> gr <Plug>(lua vim.lsp.buf.references())
+
+" require plugin configs
+lua require('kishorenewton')
+
+" autocmd BufWritePost * silent! execute '!git add % && git commit -m %' "
+autocmd BufWritePost *.rs silent! execute '!rustfmt %'
+autocmd BufWritePre *.js lua vim.lsp.buf.format { async = true } 
+autocmd BufWritePre *.ts lua vim.lsp.buf.format { async = true } 
+autocmd BufWritePre *.css lua vim.lsp.buf.format { async = true } 
+autocmd BufWritePre *.html lua vim.lsp.buf.format { async = true } 
