@@ -1,0 +1,58 @@
+[global_config]
+  focus = mouse
+  window_state = fullscreen
+  borderless = True
+  tab_position = right
+  inactive_color_offset = 0.8083832335329342
+  enabled_plugins = TestPlugin, LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, CustomCommandsMenu, ActivityWatch, InactivityWatch, Logger, InsertTermName, SaveLastSessionLayout, MavenPluginURLHandler, CurrDirOpen, TerminalShot, RunCmdOnMatchMenu
+  putty_paste_style_source_clipboard = True
+  invert_search = True
+  title_at_bottom = True
+[keybindings]
+  broadcast_off = <Alt>o
+  broadcast_group = <Alt>g
+  broadcast_all = <Alt>a
+[profiles]
+  [[default]]
+    background_color = "#0b0a0a"
+    background_darkness = 0.88
+    background_type = transparent
+    font = Dank Mono 10
+    foreground_color = "#53cd38"
+    scrollbar_position = hidden
+    scrollback_infinite = True
+    palette = "#ffffff:#99c1f1:#f9f06b:#f66151:#5e5c64:#d4acda:#c1d5e0:#77767b:#f4dada:#c01c28:#bee3e0:#f9c5b5:#e0e0a8:#e5c5bf:#f9dae5:#5e5c64"
+    use_system_font = False
+    bold_is_bright = True
+    title_transmit_bg_color = "#0b0a0a"
+    title_use_system_font = False
+    title_font = Dank Mono 10
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+  [[SaveLastSessionLayout]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 0:0
+      maximised = True
+      fullscreen = False
+      size = 38, 35
+      title = nvim .
+      last_active_term = c5736d0d-368b-4dcf-8a29-50b2210f5797
+      last_active_window = True
+    [[[terminal1]]]
+      type = Terminal
+      parent = child0
+      order = 0
+      profile = default
+      uuid = c5736d0d-368b-4dcf-8a29-50b2210f5797
+      directory = /home/kn/Desktop/code/office/code/piedap/v3/piedapiamapi
+[plugins]

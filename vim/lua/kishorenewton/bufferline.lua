@@ -1,0 +1,53 @@
+-- local bufferline = require('bufferline')
+-- 
+-- bufferline.setup({
+--     options = {
+--         -- Numbering and commands
+--         numbers = "ordinal",
+--         close_command = "bdelete! %d",
+--         right_mouse_command = "bdelete! %d",
+--         left_mouse_command = "buffer %d",
+-- 
+--         -- Icons and indicators
+--         indicator_icon = '▎',
+--         buffer_close_icon = '',
+--         modified_icon = '●',
+--         close_icon = '',
+--         left_trunc_marker = '',
+--         right_trunc_marker = '',
+-- 
+--         -- Lengths and sizes
+--         max_name_length = 18,
+--         max_prefix_length = 15,
+--         tab_size = 18,
+-- 
+--         -- Display settings
+--         show_buffer_close_icons = true,
+--         show_close_icon = true,
+--         show_tab_indicators = true,
+--         persist_buffer_sort = true,
+--         enforce_regular_tabs = false,
+--         always_show_bufferline = true,
+-- 
+--         -- Sorting
+--         sort_by = 'id',
+-- 
+--         -- Styling
+--         separator_style = "thick",  -- Using the "slant" separator
+--         style_preset = {
+--             bufferline.style_preset.no_italic,
+--             bufferline.style_preset.no_bold
+--         },
+-- 
+--         -- Hover settings
+--         hover = {
+--             enabled = true,
+--             delay = 0,
+--             reveal = {'close'}
+--         },
+-- 
+--         -- diagnostics = "nvim_lsp",
+--         diagnostics = "nvim_lsp"
+--     }
+-- })
+-- 
