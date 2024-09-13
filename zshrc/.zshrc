@@ -1,62 +1,68 @@
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh/
 
-# Load vcs_info for Git branch information
-autoload -Uz vcs_info
-precmd() { vcs_info }
+# Set name of the theme to load
+ZSH_THEME="robbyrussell"
 
-# Function to check uncommitted changes
-zsh_git_prompt() {
-    if [[ -n $(git rev-parse --is-inside-work-tree 2>/dev/null) ]]; then
-        if [[ -n $(git status -s 2>/dev/null) ]]; then
-            echo "%F{red}✘%f"
-        else
-            echo "%F{green}✔%f"
-        fi
-    fi
-}
+# Path for zinit
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Customize the vcs_info message format
-zstyle ':vcs_info:git:*' formats '%F{cyan}(%b)%f'
+# Plugin list
+zinit light agkozak/zsh-z
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zdharma-continuum/history-search-multi-word
+zinit light agkozak/zsh-z
+zinit light paulirish/git-open
+zinit light MichaelAquilina/zsh-you-should-use
+zinit light zsh-users/zsh-completions
+zinit light zdharma-continuum/zsh-diff-so-fancy
+zinit ice from"gh-r" as"program"
+zinit light BurntSushi/ripgrep
+zinit light Aloxaf/fzf-tab
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf
+zinit light marlonrichert/zsh-autocomplete
 
-# Set the prompt with custom arrow icon
-PROMPT='%F{156}➜ %1~%f${vcs_info_msg_0_}$(zsh_git_prompt) '
-RPROMPT='%F{121}%D{%I:%M:%S %p}%f'
 
-
-# Function to update the right prompt
-update_rprompt() {
-    RPROMPT='%F{121}%D{%I:%M:%S %p}%f'
-    PROMPT='%F{156}➜ %1~%f${vcs_info_msg_0_}$(zsh_git_prompt) '
-}
-
-# Call the update_rprompt function before each prompt
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd update_rprompt
-
-# Function to reset the prompt if ZLE is active
-reset_prompt_if_zle() {
-    if [[ -o interactive ]]; then
-        zle && zle reset-prompt
-    fi
-}
-
-# Load zsh/sched module
-zmodload zsh/sched
-
-# Schedule the prompt reset function
-sched_prompt_reset() {
-    sched +1 sched_prompt_reset
-    reset_prompt_if_zle
-}
-
-sched +1 sched_prompt_reset
+# Optional: Load Oh-My-Zsh libraries
+zinit snippet OMZ::lib/git.zsh
+zinit snippet OMZ::lib/theme-and-appearance.zsh
 
 # List of plugins used
-plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting z autojump web-search docker kubectl npm python thefuck tmux vi-mode history fasd dirhistory)
+plugins=(git vi-mode zsh-autosuggestions z thefuck)
 source $ZSH/oh-my-zsh.sh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Load after complete
+zinit wait lucid atload"zicompinit; zicdreplay" blockf for \
+    zsh-users/zsh-completions
+
+# Optional: Configure zsh-autocomplete
+zstyle ':autocomplete:*' min-input 1  # characters (int)
+zstyle ':autocomplete:*' insert-unambiguous yes
+zstyle ':autocomplete:*' widget-style menu-select
+
+# Enhanced reverse history search with fzf
+function fzf_history_search() {
+  local selected=$(fc -rl 1 | awk '{$1="";print substr($0,2)}' | 
+    fzf --height 40% --reverse --tac --query "$LBUFFER" --multi --exact)
+  LBUFFER=$selected
+  zle reset-prompt
+}
+zle -N fzf_history_search
+bindkey '^R' fzf_history_search  # Ctrl+R
+
+# Traditional reverse history search (if you still want it)
+bindkey '^S' history-incremental-search-forward  # Ctrl+S
+
+# Optional: Use ripgrep with fzf for faster searching
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
 
 # In case a command is not found, try to find the package that has it
 function command_not_found_handler {
@@ -86,39 +92,100 @@ elif pacman -Qi paru &>/dev/null ; then
 fi
 
 function in {
-    local pkg="$1"
-    if pacman -Si "$pkg" &>/dev/null ; then
-        sudo pacman -S "$pkg"
-    else 
-        "$aurhelper" -S "$pkg"
+    local -a inPkg=("$@")
+    local -a arch=()
+    local -a aur=()
+
+    for pkg in "${inPkg[@]}"; do
+        if pacman -Si "${pkg}" &>/dev/null ; then
+            arch+=("${pkg}")
+        else 
+            aur+=("${pkg}")
+        fi
+    done
+
+    if [[ ${#arch[@]} -gt 0 ]]; then
+        sudo pacman -S "${arch[@]}"
+    fi
+
+    if [[ ${#aur[@]} -gt 0 ]]; then
+        ${aurhelper} -S "${aur[@]}"
     fi
 }
 
 # Helpful aliases
-# alias  l='eza -lh  --icons=auto' # long list
-alias l='eza -1   --icons=auto' # short list
-alias lt='ls -lt created' # short list
+alias  c='clear' # clear terminal
+alias  l='eza -lh  --icons=auto' # long list
+# alias ls='eza -1   --icons=auto' # short list
 alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
 alias ld='eza -lhD --icons=auto' # long list dirs
+alias lt='eza --icons=auto --tree' # list folder as tree
 alias un='$aurhelper -Rns' # uninstall package
 alias up='$aurhelper -Syu' # update system/package/aur
 alias pl='$aurhelper -Qs' # list installed package
-alias pa='$aurhelper -Ss' # list availabe package
+alias pa='$aurhelper -Ss' # list available package
 alias pc='$aurhelper -Sc' # remove unused cache
 alias po='$aurhelper -Qtdq | $aurhelper -Rns -' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
-alias vc='code --disable-gpu' # gui code editor
+alias vc='code' # gui code editor
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Handy change dir shortcuts
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Always mkdir a path (this doesn't inhibit functionality to make a single dir)
+alias mkdir='mkdir -p'
 
-export PATH="/usr/bin/python:$PATH"
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+# Set the history file
+HISTFILE="${HOME}/.zsh_history"
+
+# Unlimited history size
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+# History command configuration
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/kn/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/home/kn/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/kn/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/kn/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 eval "$(github-copilot-cli alias -- "$0")"
-
-export PATH=$PATH:$HOME/go/bin
-
-
