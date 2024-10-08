@@ -312,7 +312,14 @@ local nginx_language_server_settings = {
   },
 }
 
-lspconfig.tsserver.setup {
+-- lspconfig.tsserver.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   flags = lsp_flags,
+--   settings = tsserver_settings,
+-- }
+
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   flags = lsp_flags,
