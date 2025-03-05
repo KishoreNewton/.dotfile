@@ -1,6 +1,8 @@
 " Enable syntax highlighting.
 syntax on
 
+set synmaxcol=0    " No limit on syntax highlighting line length
+
 " Enable syntax highlighting if it was previously turned off.
 syntax enable
 
