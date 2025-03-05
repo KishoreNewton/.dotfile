@@ -10,6 +10,7 @@ let g:colors_name = "hackertheme"
 " Hacker Theme Color Scheme 
 "
 " Popup Menu
+hi Normal ctermbg=NONE guibg=NONE
 hi Visual term=none cterm=none guibg=#FFFFFF  guifg=#000000
 highlight Pmenu guibg=#3C3C60 guifg=#FFFFFF
 highlight PmenuSel guibg=#5C5C80 guifg=#FFFFFF
