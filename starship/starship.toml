@@ -1,0 +1,127 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Single-line prompt with lots of information
+add_newline = false
+
+# Format: username@hostname directory git_info language_versions aws/k8s_context time cmd_duration status_indicator
+format = """
+[$username$hostname](bold green) \
+[$directory](bold blue) \
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$rust\
+$golang\
+$java\
+$php\
+$docker_context\
+$aws\
+$kubernetes\
+$time\
+$cmd_duration\
+$status\
+$character"""
+
+# Username and hostname
+[username]
+show_always = true
+style_user = "bold green"
+style_root = "bold red"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+format = "@[$hostname]($style)"
+style = "bold green"
+
+# Directory
+[directory]
+style = "bold blue"
+truncation_length = 3
+truncation_symbol = "…/"
+
+# Git information
+[git_branch]
+symbol = " "
+style = "bold purple"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+style = "bold yellow"
+format = '([\[$all_status$ahead_behind\]]($style) )'
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "*${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+# Programming languages
+[python]
+symbol = "🐍 "
+format = "[$symbol$version]($style) "
+
+[nodejs]
+symbol = "⬢ "
+format = "[$symbol$version]($style) "
+
+[rust]
+symbol = "🦀 "
+format = "[$symbol$version]($style) "
+
+[golang]
+symbol = "Go "
+format = "[$symbol$version]($style) "
+
+[java]
+symbol = "☕ "
+format = "[$symbol$version]($style) "
+
+[php]
+symbol = "🐘 "
+format = "[$symbol$version]($style) "
+
+# Cloud/container tools
+[docker_context]
+symbol = "🐳 "
+format = "[$symbol$context]($style) "
+only_with_files = false
+
+[aws]
+symbol = "AWS "
+format = "[$symbol$profile]($style) "
+style = "bold yellow"
+
+[kubernetes]
+symbol = "⎈ "
+format = "[$symbol$context]($style) "
+style = "bold cyan"
+
+# Time and duration
+[time]
+disabled = false
+format = "[$time]($style) "
+time_format = "%H:%M:%S"
+style = "bright-black"
+
+[cmd_duration]
+min_time = 500
+format = "took [$duration]($style) "
+style = "yellow"
+
+# Command status
+[status]
+style = "red"
+symbol = "✗"
+format = "[$symbol $status]($style) "
+disabled = false
+
+# Character prompt indicator
+[character]
+success_symbol = "[❯](bright-green)"
+error_symbol = "[❯](bright-red)"
