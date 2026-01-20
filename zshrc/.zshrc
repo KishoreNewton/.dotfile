@@ -466,3 +466,28 @@ if [ -f '/home/kn/google-cloud-sdk/path.zsh.inc' ]; then . '/home/kn/google-clou
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/kn/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/kn/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+# Function to add tags
+tag_file() {
+    setfattr -n user.tags -v "$2" "$1"
+    echo "Tagged $1 with: $2"
+}
+
+# Function to show tags
+show_tags() {
+    getfattr -n user.tags --only-values "$1" 2>/dev/null || echo "No tags found"
+}
+
+# Function to find files by tag
+find_by_tag() {
+    find "${2:-.}" -type f -exec sh -c '
+        tags=$(getfattr -n user.tags --only-values "$1" 2>/dev/null)
+        echo "$tags" | grep -q "'"$1"'" && echo "$1"
+    ' _ {} \;
+}
+
+# Usage examples:
+# tag_file aws_create_snapshot_and_cross_account_share.md "aws,snapshot,backup"
+# show_tags aws_create_snapshot_and_cross_account_share.md
+# find_by_tag "aws" /home/user/documents
