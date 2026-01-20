@@ -1,0 +1,205 @@
+* {
+    font-family: "JetBrains Mono", "Hack", "Fira Code", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-top: 2px solid rgba(0, 255, 0, 0.3);
+    color: #00ff00;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    margin: 0;
+    padding: 0;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/* Workspaces */
+#workspaces {
+    background-color: transparent;
+    margin: 0 4px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    background-color: transparent;
+    color: #00ff00;
+    border-bottom: 2px solid transparent;
+    min-width: 30px;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    border-bottom: 2px solid #00ff00;
+}
+
+#workspaces button.active {
+    background-color: rgba(0, 255, 0, 0.2);
+    border-bottom: 2px solid #00ff00;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+#workspaces button.urgent {
+    background-color: rgba(255, 0, 0, 0.3);
+    color: #ff0000;
+    animation: blink 1s ease-in-out infinite;
+}
+
+/* Window title */
+#window {
+    margin: 0 8px;
+    color: #00cc00;
+    font-style: italic;
+}
+
+/* Clock */
+#clock {
+    background-color: rgba(0, 255, 0, 0.1);
+    padding: 0 10px;
+    color: #00ff00;
+    border-left: 2px solid #00ff00;
+    border-right: 2px solid #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+/* System modules */
+#cpu,
+#memory,
+#disk,
+#network,
+#pulseaudio,
+#battery {
+    padding: 0 10px;
+    color: #00ff00;
+    background-color: transparent;
+    margin: 0 2px;
+}
+
+#cpu {
+    color: #00ff00;
+}
+
+#memory {
+    color: #00dd00;
+}
+
+#disk {
+    color: #00cc00;
+}
+
+#network {
+    color: #00ff00;
+}
+
+#network.disconnected {
+    color: #ff0000;
+    animation: blink 2s ease-in-out infinite;
+}
+
+#pulseaudio {
+    color: #00ee00;
+}
+
+#pulseaudio.muted {
+    color: #666666;
+}
+
+#battery {
+    color: #00ff00;
+}
+
+#battery.charging {
+    color: #00ff00;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+#battery.warning:not(.charging) {
+    color: #ffaa00;
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+#battery.critical:not(.charging) {
+    color: #ff0000;
+    animation: blink 0.5s ease-in-out infinite;
+}
+
+/* Custom modules */
+#custom-arch {
+    color: #00ff00;
+    font-size: 18px;
+    padding: 0 10px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+/* Tray */
+#tray {
+    background-color: transparent;
+    padding: 0 10px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    color: #ff0000;
+}
+
+/* Animations */
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        text-shadow: 0 0 5px #00ff00;
+    }
+    50% {
+        text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00;
+    }
+    100% {
+        text-shadow: 0 0 5px #00ff00;
+    }
+}
+
+/* Hover effects for all modules */
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#network:hover,
+#pulseaudio:hover,
+#battery:hover,
+#clock:hover {
+    background-color: rgba(0, 255, 0, 0.1);
+    text-shadow: 0 0 10px #00ff00;
+}
+
+/* Tooltip styling */
+tooltip {
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid #00ff00;
+    border-radius: 0px;
+    color: #00ff00;
+}
+
+tooltip label {
+    color: #00ff00;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+}

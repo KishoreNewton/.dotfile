@@ -1,4 +1,4 @@
--- Eviline config for lualine
+-- Eviline config for lualine (Updated for 2025)
 -- Author: shadmansaleh
 -- Credit: glepnir
 local lualine = require('lualine')
@@ -46,6 +46,8 @@ local config = {
       normal = { c = { fg = colors.fg, bg = colors.bg } },
       inactive = { c = { fg = colors.fg, bg = colors.bg } },
     },
+    -- Add global statusline option (recommended for 2025)
+    globalstatus = true,
   },
   sections = {
     -- these are to remove the defaults
@@ -64,13 +66,13 @@ local config = {
     lualine_y = {},
     lualine_z = {},
     lualine_c = {
-    {
-      'filename',
-      file_status = true,  -- still display file status if needed
-      path = 2,            -- set to 1 for relative path or 2 for absolute path
-      shorting_target = 40 -- optionally shorten the path
-    }
-  },
+      {
+        'filename',
+        file_status = true,  -- still display file status if needed
+        path = 2,            -- set to 1 for relative path or 2 for absolute path
+        shorting_target = 40 -- optionally shorten the path
+      }
+    },
     lualine_x = {},
   },
 }
@@ -96,7 +98,7 @@ ins_left {
 ins_left {
   -- mode component
   function()
-    return ''
+    return ''
   end,
   color = function()
     -- auto change color according to neovims mode
@@ -104,13 +106,13 @@ ins_left {
       n = colors.red,
       i = colors.green,
       v = colors.blue,
-      [''] = colors.blue,
+      [''] = colors.blue,
       V = colors.blue,
       c = colors.magenta,
       no = colors.red,
       s = colors.orange,
       S = colors.orange,
-      [''] = colors.orange,
+      [''] = colors.orange,
       ic = colors.yellow,
       R = colors.violet,
       Rv = colors.violet,
@@ -134,12 +136,12 @@ ins_left {
 }
 
 ins_left {
-    'filename',
-    file_status = true,  -- displays file status (e.g., read-only)
-    path = 2,            -- 0 = just filename, 1 = relative path, 2 = absolute path
-    shorting_target = 40, -- Shortens path to leave room on the statusline
-    cond = conditions.buffer_not_empty,
-    color = { fg = colors.magenta, gui = 'bold' }
+  'filename',
+  file_status = true,  -- displays file status (e.g., read-only)
+  path = 2,            -- 0 = just filename, 1 = relative path, 2 = absolute path
+  shorting_target = 40, -- Shortens path to leave room on the statusline
+  cond = conditions.buffer_not_empty,
+  color = { fg = colors.magenta, gui = 'bold' }
 }
 
 ins_left { 'location' }
@@ -148,12 +150,14 @@ ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
 
 ins_left {
   'diagnostics',
-  sources = { 'nvim_diagnostic' },
-  symbols = { error = ' ', warn = ' ', info = ' ' },
+  -- FIXED: Changed from 'nvim_diagnostic' to 'nvim_lsp' (modern source name)
+  sources = { 'nvim_lsp' },
+  symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
   diagnostics_color = {
-    color_error = { fg = colors.red },
-    color_warn = { fg = colors.yellow },
-    color_info = { fg = colors.cyan },
+    error = { fg = colors.red },      -- FIXED: Changed from color_error
+    warn = { fg = colors.yellow },    -- FIXED: Changed from color_warn
+    info = { fg = colors.cyan },      -- FIXED: Changed from color_info
+    hint = { fg = colors.blue },      -- ADDED: hint level
   },
 }
 
@@ -166,23 +170,35 @@ ins_left {
 }
 
 ins_left {
-  -- Lsp server name .
+  -- Lsp server name (COMPLETELY FIXED for 2025)
   function()
     local msg = 'No Active Lsp'
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
+    -- FIXED: Using vim.bo instead of deprecated vim.api.nvim_buf_get_option
+    local buf_ft = vim.bo.filetype
+    -- FIXED: Using vim.lsp.get_clients instead of deprecated vim.lsp.get_active_clients
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    
     if next(clients) == nil then
       return msg
     end
+    
+    -- Collect names of attached LSP clients
+    local client_names = {}
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
       if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        return client.name
+        table.insert(client_names, client.name)
       end
     end
+    
+    -- Return concatenated names or default message
+    if #client_names > 0 then
+      return table.concat(client_names, ', ')
+    end
+    
     return msg
   end,
-  icon = '  LSP:',
+  icon = '  LSP:',
   color = { fg = '#ffffff', gui = 'bold' },
 }
 
@@ -203,14 +219,14 @@ ins_right {
 
 ins_right {
   'branch',
-  icon = ' ',
+  icon = ' ',
   color = { fg = colors.violet, gui = 'bold' },
 }
 
 ins_right {
   'diff',
-  -- Is it me or the symbol for modified us really weird
-  symbols = { added = ' ', modified = '🯄 ', removed = ' ' },
+  -- Is it me or the symbol for modified is really weird
+  symbols = { added = ' ', modified = '󰝤 ', removed = ' ' }, -- Fixed the modified symbol
   diff_color = {
     added = { fg = colors.green },
     modified = { fg = colors.orange },
@@ -218,7 +234,6 @@ ins_right {
   },
   cond = conditions.hide_in_width,
 }
-
 
 ins_right {
   function()
@@ -228,6 +243,7 @@ ins_right {
   padding = { left = 1 },
 }
 
+-- Mode map for reference (not used in this config but useful to have)
 local mode_map = {
   ['n']  = 'NORMAL',
   ['no'] = 'N-OPER',
@@ -236,10 +252,10 @@ local mode_map = {
   ['ix'] = 'I-XCOMP',
   ['v']  = 'VISUAL',
   ['V']  = 'V-LINE',
-  ['␖'] = 'V-BLOCK', -- This is <C-v>, Ctrl-V in ASCII
+  [''] = 'V-BLOCK', -- Ctrl-V
   ['s']  = 'SELECT',
   ['S']  = 'S-LINE',
-  ['␓'] = 'S-BLOCK', -- This is <C-s>, Ctrl-S in ASCII
+  [''] = 'S-BLOCK', -- Ctrl-S
   ['c']  = 'COMMAND',
   ['cv'] = 'CMDLINE V',
   ['ce'] = 'EX',
@@ -249,6 +265,21 @@ local mode_map = {
   ['!']  = 'SHELL',
   ['t']  = 'TERMINAL'
 }
+
+-- Alternative helper function for getting LSP info (bonus utility)
+function GetLspInfo()
+  -- Using modern API
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  if #clients == 0 then
+    return ""
+  end
+  
+  local names = {}
+  for _, client in ipairs(clients) do
+    table.insert(names, client.name)
+  end
+  return " " .. table.concat(names, ", ")
+end
 
 -- Now don't forget to initialize lualine
 lualine.setup(config)

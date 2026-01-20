@@ -1,8 +1,223 @@
 VteTerminal, TerminalScreen, vte-terminal {
     padding: 20px 20px 0px 20px;
+    background-color: rgba(15, 15, 20, 0.95);
+    color: #e0e0e0;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 11pt;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 VteTerminal {
     -TerminalScreen-inner-border: 20px 20px 0px 20px;
+    background-image: linear-gradient(135deg,
+                      rgba(30, 30, 40, 0.98) 0%,
+                      rgba(15, 15, 20, 0.98) 100%);
+}
+
+/* Smooth cursor animation */
+VteTerminal .cursor {
+    background-color: #00ff88;
+    border-radius: 2px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Selection styling */
+VteTerminal selection,
+VteTerminal :selected {
+    background-color: rgba(100, 150, 255, 0.3);
+    border-radius: 3px;
+}
+
+/* Window decorations */
+window, .window-frame {
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+headerbar {
+    background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%);
+    border-radius: 12px 12px 0 0;
+    padding: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+headerbar .title {
+    color: #e0e0e0;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+headerbar button {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #e0e0e0;
+    padding: 4px 8px;
+    transition: all 0.2s ease;
+}
+
+headerbar button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 150, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+headerbar button:active {
+    transform: translateY(0);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Scrollbars */
+scrollbar {
+    background-color: transparent;
+    border: none;
+    width: 12px;
+}
+
+scrollbar slider {
+    background: linear-gradient(135deg, #4a4a6e, #3a3a5e);
+    border-radius: 6px;
+    min-width: 8px;
+    min-height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+scrollbar slider:hover {
+    background: linear-gradient(135deg, #5a5a7e, #4a4a6e);
+    box-shadow: 0 0 10px rgba(100, 150, 255, 0.3);
+}
+
+/* Tooltips */
+tooltip {
+    background: linear-gradient(135deg, #2a2a3e, #1a1a2e);
+    border: 1px solid rgba(100, 150, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #e0e0e0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+tooltip label {
+    color: #e0e0e0;
+    font-size: 10pt;
+}
+
+/* Context menus */
+menu, .menu, .context-menu {
+    background: linear-gradient(135deg, #2a2a3e, #1a1a2e);
+    border: 1px solid rgba(100, 150, 255, 0.2);
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+menuitem {
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: #e0e0e0;
+    transition: all 0.2s ease;
+}
+
+menuitem:hover {
+    background: rgba(100, 150, 255, 0.2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Buttons with glow effect */
+button {
+    background: linear-gradient(135deg, #3a3a5e, #2a2a4e);
+    border: 1px solid rgba(100, 150, 255, 0.3);
+    border-radius: 6px;
+    color: #e0e0e0;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #4a4a6e, #3a3a5e);
+    box-shadow: 0 0 20px rgba(100, 150, 255, 0.4),
+                inset 0 1px 3px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Text entries with neon glow */
+entry, .entry {
+    background: rgba(20, 20, 30, 0.8);
+    border: 2px solid rgba(100, 150, 255, 0.2);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+entry:focus, .entry:focus {
+    border-color: #00ff88;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3),
+                inset 0 0 5px rgba(0, 255, 136, 0.1);
+    background: rgba(20, 20, 30, 0.95);
+}
+
+/* Progress bars */
+progressbar {
+    background: rgba(20, 20, 30, 0.5);
+    border-radius: 4px;
+    border: 1px solid rgba(100, 150, 255, 0.2);
+}
+
+progressbar progress {
+    background: linear-gradient(90deg,
+                #00ff88 0%,
+                #00bbff 50%,
+                #aa00ff 100%);
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+    animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+/* Switches with smooth animation */
+switch {
+    background: linear-gradient(135deg, #2a2a3e, #1a1a2e);
+    border: 2px solid rgba(100, 150, 255, 0.2);
+    border-radius: 20px;
+    padding: 2px;
+    transition: all 0.3s ease;
+}
+
+switch:checked {
+    background: linear-gradient(135deg, #00ff88, #00bbff);
+    border-color: #00ff88;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+}
+
+switch slider {
+    background: #e0e0e0;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+switch:checked slider {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 

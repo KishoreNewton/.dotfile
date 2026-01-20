@@ -1,0 +1,120 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "fixed-center": true,
+    "height": 30,
+    "spacing": 2,
+    "margin": 0,
+    "exclusive": true,
+    
+    "modules-left": ["custom/arch", "hyprland/workspaces", "hyprland/window"],
+    "modules-center": ["clock"],
+    "modules-right": ["cpu", "memory", "disk", "network", "pulseaudio", "battery", "tray"],
+    
+    "custom/arch": {
+        "format": " {} ",
+        "exec": "echo '󰣇'",
+        "interval": "once",
+        "tooltip": false
+    },
+    
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "all-outputs": true,
+        "show-special": false,
+        "persistent-workspaces": {
+            "*": [1, 2, 3, 4, 5]
+        }
+    },
+    
+    "hyprland/window": {
+        "format": ">> {}",
+        "max-length": 50,
+        "separate-outputs": true
+    },
+    
+    "clock": {
+        "interval": 1,
+        "format": "[{:%H:%M:%S}]",
+        "format-alt": "[{:%Y-%m-%d %H:%M:%S}]",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#00ff00'><b>{}</b></span>",
+                "days": "<span color='#00ff00'><b>{}</b></span>",
+                "weeks": "<span color='#00cc00'><b>W{}</b></span>",
+                "weekdays": "<span color='#00ff00'><b>{}</b></span>",
+                "today": "<span color='#ff0000'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+    
+    "cpu": {
+        "interval": 1,
+        "format": "CPU:[{usage}%]",
+        "tooltip": true,
+        "on-click": "terminator -e htop"
+    },
+
+    "memory": {
+        "interval": 1,
+        "format": "RAM:[{percentage}%]",
+        "format-alt": "RAM:[{used:0.1f}G/{total:0.1f}G]",
+        "tooltip": true,
+        "tooltip-format": "Used: {used:0.1f}GB\nFree: {avail:0.1f}GB\nTotal: {total:0.1f}GB"
+    },
+
+    "disk": {
+        "interval": 30,
+        "format": "DISK:[{percentage_used}%]",
+        "path": "/",
+        "tooltip": true,
+        "tooltip-format": "Used: {used}\nFree: {free}\nTotal: {total}"
+    },
+    
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": "NET:[{signalStrength}%]",
+        "format-ethernet": "NET:[Connected]",
+        "format-disconnected": "NET:[OFFLINE]",
+        "tooltip": true,
+        "tooltip-format": "{ifname}\n{ipaddr}/{cidr}\n↑{bandwidthUpBytes} ↓{bandwidthDownBytes}",
+        "on-click": "terminator -e nmtui",
+        "interval": 1
+    },
+
+    "pulseaudio": {
+        "format": "VOL:[{volume}%]",
+        "format-muted": "VOL:[MUTED]",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "pamixer -t",
+        "scroll-step": 5,
+        "tooltip": true
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "PWR:[{capacity}%]",
+        "format-charging": "PWR:[{capacity}%+]",
+        "format-plugged": "PWR:[AC]",
+        "format-alt": "PWR:[{time}]",
+        "tooltip": true,
+        "tooltip-format": "{capacity}%\n{timeTo}"
+    },
+    
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    }
+}

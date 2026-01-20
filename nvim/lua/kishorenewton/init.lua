@@ -1,7 +1,6 @@
 -- require('kishorenewton.telescope')
 -- require('kishorenewton.lspconfig')
 require('kishorenewton.cmp')
-require('kishorenewton.specs')
 -- require('kishorenewton.ai')
 -- require('kishorenewton.codeai')
 require('kishorenewton.lualine')

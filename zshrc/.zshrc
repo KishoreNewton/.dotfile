@@ -1,3 +1,4 @@
+export PATH=$PATH:/var/lib/snapd/snap/bin
 #==============================================================================
 # ULTIMATE ZSH CONFIGURATION
 # Features:
@@ -456,8 +457,12 @@ if [ -d "$HOME/.nvm" ]; then
     function yarn() { nvm_load; yarn "$@"; }
 fi
 
-#==============================================================================
-# LOAD LOCAL CONFIGURATIONS
-#==============================================================================
-# Source local customizations if they exist
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local0
+# Add this after your existing keybindings section
+bindkey -M viins '^D' delete-char-or-list  # Insert mode
+bindkey -M vicmd '^D' delete-char-or-list  # Command mode
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/kn/google-cloud-sdk/path.zsh.inc' ]; then . '/home/kn/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/kn/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/kn/google-cloud-sdk/completion.zsh.inc'; fi
