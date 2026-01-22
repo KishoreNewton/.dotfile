@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=HackerGreen
+Comment=A cyberpunk hacker theme with neon green accents
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=HackerGreen
+MetacityTheme=HackerGreen
+IconTheme=Papirus-Dark
+CursorTheme=Bibata-Modern-Ice
+ButtonLayout=close,minimize,maximize:menu

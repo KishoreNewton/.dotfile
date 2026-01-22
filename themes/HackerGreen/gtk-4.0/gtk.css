@@ -1,0 +1,498 @@
+/*
+ * HackerGreen GTK4 Theme
+ * A cyberpunk/hacker aesthetic with neon green (#00ff00) accent
+ * Note: GTK4 uses libadwaita - this provides overrides
+ */
+
+/* ===== COLOR DEFINITIONS ===== */
+@define-color window_bg_color #0a0a0f;
+@define-color window_fg_color #e0e0e0;
+@define-color view_bg_color #050508;
+@define-color view_fg_color #e0e0e0;
+@define-color headerbar_bg_color #151520;
+@define-color headerbar_fg_color #e0e0e0;
+@define-color headerbar_border_color rgba(0, 255, 0, 0.2);
+@define-color card_bg_color #101018;
+@define-color card_fg_color #e0e0e0;
+@define-color popover_bg_color #151520;
+@define-color popover_fg_color #e0e0e0;
+@define-color dialog_bg_color #0a0a0f;
+@define-color dialog_fg_color #e0e0e0;
+@define-color sidebar_bg_color #050508;
+@define-color sidebar_fg_color #e0e0e0;
+@define-color sidebar_shade_color rgba(0, 0, 0, 0.25);
+@define-color secondary_sidebar_bg_color #080810;
+@define-color accent_bg_color #00ff00;
+@define-color accent_fg_color #000000;
+@define-color accent_color #00ff00;
+@define-color destructive_bg_color #ff3333;
+@define-color destructive_fg_color #ffffff;
+@define-color destructive_color #ff3333;
+@define-color success_bg_color #00ff00;
+@define-color success_fg_color #000000;
+@define-color success_color #00ff00;
+@define-color warning_bg_color #ffcc00;
+@define-color warning_fg_color #000000;
+@define-color warning_color #ffcc00;
+@define-color error_bg_color #ff3333;
+@define-color error_fg_color #ffffff;
+@define-color error_color #ff3333;
+@define-color borders rgba(0, 255, 0, 0.2);
+@define-color shade_color rgba(0, 0, 0, 0.36);
+@define-color scrollbar_outline_color rgba(0, 255, 0, 0.1);
+
+/* Custom accent glow */
+@define-color accent_glow rgba(0, 255, 0, 0.3);
+@define-color accent_dim #00cc00;
+@define-color accent_secondary #00ff88;
+@define-color fg_dim #808080;
+
+/* ===== WINDOW ===== */
+window, window.background {
+    background-color: @window_bg_color;
+    color: @window_fg_color;
+}
+
+window.csd {
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6),
+                0 0 1px @accent_glow;
+}
+
+/* ===== HEADERBAR ===== */
+headerbar {
+    background: linear-gradient(180deg, @headerbar_bg_color 0%, @window_bg_color 100%);
+    border-bottom: 1px solid @borders;
+    padding: 2px 6px;
+    min-height: 24px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+headerbar:backdrop {
+    background: @headerbar_bg_color;
+}
+
+headerbar .title {
+    color: @accent_color;
+    font-weight: bold;
+}
+
+headerbar button {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: @window_fg_color;
+    transition: all 200ms ease;
+}
+
+headerbar button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    border-color: @borders;
+    box-shadow: 0 0 10px @accent_glow;
+}
+
+headerbar button:active,
+headerbar button:checked {
+    background: rgba(0, 255, 0, 0.15);
+}
+
+/* Window controls */
+windowcontrols button {
+    min-width: 24px;
+    min-height: 24px;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+windowcontrols button.close {
+    background: #ff5555;
+}
+
+windowcontrols button.close:hover {
+    background: #ff6666;
+    box-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
+}
+
+windowcontrols button.minimize {
+    background: #ffcc00;
+}
+
+windowcontrols button.minimize:hover {
+    background: #ffdd33;
+}
+
+windowcontrols button.maximize {
+    background: @accent_color;
+}
+
+windowcontrols button.maximize:hover {
+    background: #33ff33;
+    box-shadow: 0 0 10px @accent_glow;
+}
+
+/* ===== BUTTONS ===== */
+button {
+    background: linear-gradient(180deg, #1a1a25 0%, #101018 100%);
+    border: 1px solid @borders;
+    border-radius: 6px;
+    color: @window_fg_color;
+    padding: 8px 16px;
+    min-height: 24px;
+    transition: all 200ms ease;
+}
+
+button:hover {
+    background: linear-gradient(180deg, #202030 0%, #151520 100%);
+    border-color: rgba(0, 255, 0, 0.4);
+    box-shadow: 0 0 15px @accent_glow;
+    color: @accent_color;
+}
+
+button:active {
+    background: linear-gradient(180deg, #101018 0%, #0a0a10 100%);
+}
+
+button:checked {
+    background: linear-gradient(180deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 255, 0, 0.1) 100%);
+    border-color: @accent_color;
+    color: @accent_color;
+}
+
+button.suggested-action {
+    background: linear-gradient(180deg, #00dd00 0%, #00aa00 100%);
+    border-color: @accent_color;
+    color: #000000;
+    font-weight: bold;
+}
+
+button.suggested-action:hover {
+    background: linear-gradient(180deg, #00ff00 0%, #00cc00 100%);
+    box-shadow: 0 0 20px @accent_glow;
+}
+
+button.destructive-action {
+    background: linear-gradient(180deg, #dd3333 0%, #aa2222 100%);
+    border-color: @destructive_color;
+    color: #ffffff;
+}
+
+button.destructive-action:hover {
+    box-shadow: 0 0 20px rgba(255, 51, 51, 0.4);
+}
+
+button.flat {
+    background: transparent;
+    border: none;
+}
+
+button.flat:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+/* ===== ENTRIES ===== */
+entry {
+    background: @view_bg_color;
+    border: 2px solid @borders;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: @view_fg_color;
+    caret-color: @accent_color;
+    transition: all 200ms ease;
+}
+
+entry:focus {
+    border-color: @accent_color;
+    box-shadow: 0 0 15px @accent_glow;
+}
+
+entry > selection {
+    background-color: rgba(0, 255, 0, 0.25);
+}
+
+/* ===== LISTS ===== */
+listview, list {
+    background: @view_bg_color;
+    color: @view_fg_color;
+}
+
+row {
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 150ms ease;
+}
+
+row:hover {
+    background: rgba(0, 255, 0, 0.05);
+}
+
+row:selected {
+    background: rgba(0, 255, 0, 0.15);
+    border-left: 3px solid @accent_color;
+}
+
+row:selected label {
+    color: @accent_color;
+}
+
+/* ===== SCROLLBARS ===== */
+scrollbar {
+    background: transparent;
+}
+
+scrollbar slider {
+    background: linear-gradient(180deg, #2a2a3a 0%, #1a1a2a 100%);
+    border: 1px solid @borders;
+    border-radius: 6px;
+    min-width: 8px;
+    min-height: 40px;
+    transition: all 200ms ease;
+}
+
+scrollbar slider:hover {
+    background: linear-gradient(180deg, #3a3a4a 0%, #2a2a3a 100%);
+    box-shadow: 0 0 8px @accent_glow;
+}
+
+/* ===== SWITCHES ===== */
+switch {
+    background: @view_bg_color;
+    border: 2px solid @borders;
+    border-radius: 20px;
+    min-width: 50px;
+    min-height: 26px;
+    transition: all 300ms ease;
+}
+
+switch:checked {
+    background: linear-gradient(90deg, @accent_dim 0%, @accent_color 100%);
+    border-color: @accent_color;
+    box-shadow: 0 0 15px @accent_glow;
+}
+
+switch > slider {
+    background: @window_fg_color;
+    border-radius: 50%;
+    min-width: 22px;
+    min-height: 22px;
+}
+
+switch:checked > slider {
+    background: #ffffff;
+}
+
+/* ===== CHECK & RADIO ===== */
+check, radio {
+    background: @view_bg_color;
+    border: 2px solid @borders;
+    min-width: 20px;
+    min-height: 20px;
+    transition: all 200ms ease;
+}
+
+check {
+    border-radius: 4px;
+}
+
+radio {
+    border-radius: 50%;
+}
+
+check:hover, radio:hover {
+    border-color: @accent_color;
+    box-shadow: 0 0 10px @accent_glow;
+}
+
+check:checked, radio:checked {
+    background: @accent_color;
+    border-color: @accent_color;
+}
+
+/* ===== PROGRESS ===== */
+progressbar > trough {
+    background: @view_bg_color;
+    border: 1px solid @borders;
+    border-radius: 4px;
+    min-height: 8px;
+}
+
+progressbar > trough > progress {
+    background: linear-gradient(90deg, @accent_color 0%, @accent_secondary 100%);
+    border-radius: 3px;
+    box-shadow: 0 0 10px @accent_glow;
+}
+
+/* ===== SCALE ===== */
+scale > trough {
+    background: @view_bg_color;
+    border: 1px solid @borders;
+    border-radius: 4px;
+}
+
+scale > trough > highlight {
+    background: @accent_color;
+    border-radius: 4px;
+}
+
+scale > trough > slider {
+    background: linear-gradient(180deg, #2a2a3a 0%, #1a1a2a 100%);
+    border: 2px solid @accent_color;
+    border-radius: 50%;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+scale > trough > slider:hover {
+    background: @accent_color;
+    box-shadow: 0 0 15px @accent_glow;
+}
+
+/* ===== MENUS & POPOVERS ===== */
+popover, popover.background {
+    background: linear-gradient(180deg, @popover_bg_color 0%, @window_bg_color 100%);
+    border: 1px solid @borders;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+popover modelbutton {
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 150ms ease;
+}
+
+popover modelbutton:hover {
+    background: rgba(0, 255, 0, 0.1);
+    color: @accent_color;
+}
+
+/* ===== TOOLTIP ===== */
+tooltip {
+    background: linear-gradient(180deg, #1a1a25 0%, #0f0f18 100%);
+    border: 1px solid rgba(0, 255, 0, 0.4);
+    border-radius: 6px;
+    padding: 6px 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5),
+                0 0 10px @accent_glow;
+}
+
+tooltip > label {
+    color: @window_fg_color;
+}
+
+/* ===== NOTEBOOK / TABS ===== */
+notebook > header {
+    background: @view_bg_color;
+    border-bottom: 1px solid @borders;
+}
+
+notebook > header > tabs > tab {
+    background: transparent;
+    padding: 2px 10px;
+    min-height: 16px;
+    color: @fg_dim;
+    transition: all 200ms ease;
+}
+
+notebook > header > tabs > tab:hover {
+    color: @window_fg_color;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+notebook > header > tabs > tab:checked {
+    color: @accent_color;
+    border-bottom: 2px solid @accent_color;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    background: @sidebar_bg_color;
+    border-right: 1px solid @borders;
+}
+
+.sidebar row:selected {
+    background: rgba(0, 255, 0, 0.15);
+}
+
+/* ===== CARDS ===== */
+.card {
+    background: @card_bg_color;
+    border: 1px solid @borders;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== TOASTS ===== */
+.toast {
+    background: @popover_bg_color;
+    border: 1px solid @borders;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== LINKS ===== */
+link {
+    color: @accent_color;
+}
+
+link:hover {
+    color: @accent_secondary;
+}
+
+/* ===== OSD ===== */
+.osd {
+    background: rgba(10, 10, 15, 0.9);
+    border: 1px solid @borders;
+    border-radius: 8px;
+}
+
+/* ===== SPINNER ===== */
+spinner {
+    color: @accent_color;
+}
+
+/* ===== CALENDAR ===== */
+calendar {
+    background: @view_bg_color;
+    color: @view_fg_color;
+    border: 1px solid @borders;
+    border-radius: 8px;
+}
+
+calendar:selected {
+    background: @accent_color;
+    color: #000000;
+    border-radius: 50%;
+}
+
+/* ===== ACTIONBAR ===== */
+actionbar {
+    background: @headerbar_bg_color;
+    border-top: 1px solid @borders;
+}
+
+/* ===== STATUSBAR ===== */
+statusbar {
+    background: @view_bg_color;
+    border-top: 1px solid @borders;
+    color: @fg_dim;
+}
+
+/* ===== INFOBAR ===== */
+infobar {
+    border-radius: 6px;
+}
+
+infobar.info {
+    background: rgba(0, 150, 255, 0.2);
+    border: 1px solid rgba(0, 150, 255, 0.4);
+}
+
+infobar.warning {
+    background: rgba(255, 200, 0, 0.2);
+    border: 1px solid @warning_color;
+}
+
+infobar.error {
+    background: rgba(255, 50, 50, 0.2);
+    border: 1px solid @error_color;
+}

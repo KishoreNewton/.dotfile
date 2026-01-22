@@ -1,0 +1,176 @@
+# HackerGreen GTK2 Theme
+# For legacy GTK2 applications
+
+gtk-color-scheme = "bg_color:#0a0a0f\nfg_color:#e0e0e0\nbase_color:#050508\ntext_color:#e0e0e0\nselected_bg_color:#00ff00\nselected_fg_color:#000000\ntooltip_bg_color:#151520\ntooltip_fg_color:#e0e0e0"
+
+style "default" {
+    # Background
+    bg[NORMAL]        = @bg_color
+    bg[PRELIGHT]      = shade(1.1, @bg_color)
+    bg[ACTIVE]        = shade(0.9, @bg_color)
+    bg[SELECTED]      = @selected_bg_color
+    bg[INSENSITIVE]   = @bg_color
+
+    # Foreground
+    fg[NORMAL]        = @fg_color
+    fg[PRELIGHT]      = @fg_color
+    fg[ACTIVE]        = @fg_color
+    fg[SELECTED]      = @selected_fg_color
+    fg[INSENSITIVE]   = shade(0.5, @fg_color)
+
+    # Base (text entries, lists)
+    base[NORMAL]      = @base_color
+    base[PRELIGHT]    = shade(1.1, @base_color)
+    base[ACTIVE]      = shade(1.2, @selected_bg_color)
+    base[SELECTED]    = @selected_bg_color
+    base[INSENSITIVE] = @base_color
+
+    # Text
+    text[NORMAL]      = @text_color
+    text[PRELIGHT]    = @text_color
+    text[ACTIVE]      = @selected_fg_color
+    text[SELECTED]    = @selected_fg_color
+    text[INSENSITIVE] = shade(0.5, @text_color)
+
+    # Engine settings
+    engine "murrine" {
+        animation           = TRUE
+        arrowstyle          = 1
+        border_shades       = { 1.0, 0.8 }
+        colorize_scrollbar  = TRUE
+        comboboxstyle       = 0
+        contrast            = 0.8
+        default_button_color = @selected_bg_color
+        expanderstyle       = 2
+        focusstyle          = 3
+        glazestyle          = 0
+        glow_shade          = 1.0
+        glowstyle           = 4
+        gradient_shades     = { 1.1, 1.0, 1.0, 0.9 }
+        handlestyle         = 1
+        highlight_shade     = 1.0
+        lightborder_shade   = 1.1
+        lightborderstyle    = 1
+        listviewheaderstyle = 1
+        listviewstyle       = 1
+        menubaritemstyle    = 1
+        menubarstyle        = 0
+        menuitemstyle       = 1
+        menustyle           = 0
+        progressbarstyle    = 1
+        reliefstyle         = 2
+        rgba                = TRUE
+        roundness           = 4
+        scrollbarstyle      = 0
+        separatorstyle      = 1
+        shadow_shades       = { 0.5, 0.0 }
+        sliderstyle         = 0
+        spinbuttonstyle     = 1
+        stepperstyle        = 1
+        textstyle           = 0
+        toolbarstyle        = 2
+        trough_shades       = { 0.8, 0.7 }
+    }
+}
+
+style "button" {
+    bg[NORMAL]   = shade(1.1, @bg_color)
+    bg[PRELIGHT] = shade(1.2, @bg_color)
+    bg[ACTIVE]   = shade(0.9, @bg_color)
+    fg[NORMAL]   = @fg_color
+    fg[PRELIGHT] = @selected_bg_color
+}
+
+style "entry" {
+    base[NORMAL]   = @base_color
+    base[SELECTED] = @selected_bg_color
+    text[NORMAL]   = @text_color
+    text[SELECTED] = @selected_fg_color
+
+    engine "murrine" {
+        focus_color = @selected_bg_color
+    }
+}
+
+style "menubar" {
+    bg[NORMAL]   = @bg_color
+    fg[NORMAL]   = @fg_color
+    fg[PRELIGHT] = @selected_bg_color
+}
+
+style "menu" {
+    bg[NORMAL]   = shade(1.05, @bg_color)
+    bg[SELECTED] = @selected_bg_color
+    fg[NORMAL]   = @fg_color
+    fg[PRELIGHT] = @selected_fg_color
+}
+
+style "menuitem" {
+    bg[PRELIGHT] = @selected_bg_color
+    fg[PRELIGHT] = @selected_fg_color
+}
+
+style "scrollbar" {
+    bg[NORMAL]   = shade(1.2, @bg_color)
+    bg[PRELIGHT] = @selected_bg_color
+    bg[ACTIVE]   = shade(1.3, @bg_color)
+
+    engine "murrine" {
+        colorize_scrollbar = TRUE
+        roundness          = 6
+        gradient_shades    = { 1.0, 1.0, 1.0, 1.0 }
+        trough_shades      = { 0.8, 0.8 }
+    }
+}
+
+style "progressbar" {
+    bg[NORMAL]   = @base_color
+    bg[SELECTED] = @selected_bg_color
+    fg[PRELIGHT] = @selected_fg_color
+
+    engine "murrine" {
+        gradient_shades = { 1.2, 1.0, 1.0, 0.85 }
+        roundness       = 4
+    }
+}
+
+style "notebook" {
+    bg[NORMAL]   = @bg_color
+    bg[ACTIVE]   = shade(0.9, @bg_color)
+    bg[SELECTED] = @selected_bg_color
+}
+
+style "treeview" {
+    bg[NORMAL]   = @base_color
+    base[NORMAL] = @base_color
+}
+
+style "tooltip" {
+    bg[NORMAL] = @tooltip_bg_color
+    fg[NORMAL] = @tooltip_fg_color
+}
+
+style "frame" {
+    bg[NORMAL] = @bg_color
+}
+
+# Widget mappings
+class "GtkWidget"       style "default"
+class "GtkButton"       style "button"
+class "GtkEntry"        style "entry"
+class "GtkMenuBar"      style "menubar"
+class "GtkMenu"         style "menu"
+class "GtkMenuItem"     style "menuitem"
+class "GtkScrollbar"    style "scrollbar"
+class "GtkProgressBar"  style "progressbar"
+class "GtkNotebook"     style "notebook"
+class "GtkTreeView"     style "treeview"
+class "GtkTooltip"      style "tooltip"
+class "GtkFrame"        style "frame"
+
+widget_class "*<GtkMenuBar>*" style "menubar"
+widget_class "*<GtkMenu>*"    style "menu"
+widget_class "*<GtkMenuItem>*" style "menuitem"
+
+# Specific application fixes
+widget "gtk-tooltip*" style "tooltip"

@@ -1,0 +1,830 @@
+/*
+ * HackerGreen GTK3 Theme
+ * A cyberpunk/hacker aesthetic with neon green (#00ff00) accent
+ */
+
+/* ===== COLOR DEFINITIONS ===== */
+@define-color bg_color #0a0a0f;
+@define-color bg_dark #050508;
+@define-color bg_light #151520;
+@define-color fg_color #e0e0e0;
+@define-color fg_dim #808080;
+@define-color accent_color #00ff00;
+@define-color accent_dim #00cc00;
+@define-color accent_glow rgba(0, 255, 0, 0.3);
+@define-color accent_secondary #00ff88;
+@define-color border_color rgba(0, 255, 0, 0.2);
+@define-color border_bright rgba(0, 255, 0, 0.4);
+@define-color selection_color rgba(0, 255, 0, 0.25);
+@define-color error_color #ff3333;
+@define-color warning_color #ffcc00;
+@define-color success_color #00ff00;
+
+/* ===== GLOBAL STYLES ===== */
+* {
+    -gtk-icon-style: symbolic;
+    outline-style: none;
+    outline-width: 0;
+}
+
+/* ===== WINDOW ===== */
+window, .background {
+    background-color: @bg_color;
+    color: @fg_color;
+}
+
+window.csd {
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6),
+                0 0 1px rgba(0, 255, 0, 0.3);
+}
+
+decoration {
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6),
+                0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+/* ===== HEADERBAR ===== */
+headerbar {
+    background: linear-gradient(180deg, #151520 0%, #0a0a0f 100%);
+    border-bottom: 1px solid @border_color;
+    border-radius: 12px 12px 0 0;
+    padding: 2px 6px;
+    min-height: 24px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+headerbar:backdrop {
+    background: linear-gradient(180deg, #101015 0%, #080810 100%);
+}
+
+headerbar .title {
+    color: @accent_color;
+    font-weight: bold;
+    text-shadow: 0 0 10px @accent_glow;
+}
+
+headerbar .subtitle {
+    color: @fg_dim;
+    font-size: 0.9em;
+}
+
+/* Headerbar buttons */
+headerbar button {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: @fg_color;
+    padding: 4px 8px;
+    margin: 2px;
+    transition: all 0.2s ease;
+}
+
+headerbar button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    border-color: @border_color;
+    box-shadow: 0 0 10px @accent_glow;
+}
+
+headerbar button:active,
+headerbar button:checked {
+    background: rgba(0, 255, 0, 0.15);
+    border-color: @border_bright;
+}
+
+/* Window controls */
+windowcontrols button {
+    min-width: 16px;
+    min-height: 16px;
+    padding: 4px;
+    margin: 0 2px;
+    border-radius: 50%;
+}
+
+windowcontrols button.close {
+    background: #ff5555;
+}
+
+windowcontrols button.close:hover {
+    background: #ff6666;
+    box-shadow: 0 0 10px rgba(255, 85, 85, 0.5);
+}
+
+windowcontrols button.minimize {
+    background: #ffcc00;
+}
+
+windowcontrols button.minimize:hover {
+    background: #ffdd33;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+}
+
+windowcontrols button.maximize {
+    background: @accent_color;
+}
+
+windowcontrols button.maximize:hover {
+    background: #33ff33;
+    box-shadow: 0 0 10px @accent_glow;
+}
+
+/* ===== BUTTONS ===== */
+button {
+    background: linear-gradient(180deg, #1a1a25 0%, #101018 100%);
+    border: 1px solid @border_color;
+    border-radius: 6px;
+    color: @fg_color;
+    padding: 8px 16px;
+    min-height: 24px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: linear-gradient(180deg, #202030 0%, #151520 100%);
+    border-color: @border_bright;
+    box-shadow: 0 0 15px @accent_glow;
+    color: @accent_color;
+}
+
+button:active {
+    background: linear-gradient(180deg, #101018 0%, #0a0a10 100%);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+button:checked {
+    background: linear-gradient(180deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 255, 0, 0.1) 100%);
+    border-color: @accent_color;
+    color: @accent_color;
+}
+
+button:disabled {
+    opacity: 0.5;
+}
+
+button.suggested-action {
+    background: linear-gradient(180deg, #00dd00 0%, #00aa00 100%);
+    border-color: @accent_color;
+    color: #000000;
+    font-weight: bold;
+}
+
+button.suggested-action:hover {
+    background: linear-gradient(180deg, #00ff00 0%, #00cc00 100%);
+    box-shadow: 0 0 20px @accent_glow;
+}
+
+button.destructive-action {
+    background: linear-gradient(180deg, #dd3333 0%, #aa2222 100%);
+    border-color: #ff3333;
+    color: #ffffff;
+}
+
+button.destructive-action:hover {
+    background: linear-gradient(180deg, #ff3333 0%, #cc2222 100%);
+    box-shadow: 0 0 20px rgba(255, 51, 51, 0.4);
+}
+
+/* Flat buttons */
+button.flat {
+    background: transparent;
+    border: none;
+}
+
+button.flat:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+/* ===== TEXT ENTRIES ===== */
+entry {
+    background: @bg_dark;
+    border: 2px solid @border_color;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: @fg_color;
+    caret-color: @accent_color;
+    transition: all 0.2s ease;
+}
+
+entry:focus {
+    border-color: @accent_color;
+    box-shadow: 0 0 15px @accent_glow,
+                inset 0 0 5px rgba(0, 255, 0, 0.05);
+}
+
+entry:disabled {
+    opacity: 0.5;
+}
+
+entry selection {
+    background-color: @selection_color;
+}
+
+/* ===== TEXT VIEW ===== */
+textview, textview text {
+    background-color: @bg_dark;
+    color: @fg_color;
+}
+
+textview border {
+    background-color: @bg_color;
+}
+
+/* ===== LABELS ===== */
+label {
+    color: @fg_color;
+}
+
+label:disabled {
+    color: @fg_dim;
+}
+
+label.dim-label {
+    color: @fg_dim;
+}
+
+/* ===== LINKS ===== */
+link, *:link {
+    color: @accent_color;
+}
+
+link:hover, *:link:hover {
+    color: @accent_secondary;
+    text-shadow: 0 0 8px @accent_glow;
+}
+
+link:visited {
+    color: @accent_dim;
+}
+
+/* ===== LISTS & ROWS ===== */
+list, listview {
+    background-color: @bg_color;
+}
+
+row {
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+
+row:hover {
+    background-color: rgba(0, 255, 0, 0.05);
+}
+
+row:selected {
+    background-color: @selection_color;
+    border-left: 3px solid @accent_color;
+}
+
+row:selected label {
+    color: @accent_color;
+}
+
+/* ===== SCROLLBARS ===== */
+scrollbar {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar.vertical {
+    min-width: 12px;
+}
+
+scrollbar.horizontal {
+    min-height: 12px;
+}
+
+scrollbar slider {
+    background: linear-gradient(180deg, #2a2a3a 0%, #1a1a2a 100%);
+    border: 1px solid @border_color;
+    border-radius: 6px;
+    min-width: 8px;
+    min-height: 40px;
+    transition: all 0.2s ease;
+}
+
+scrollbar slider:hover {
+    background: linear-gradient(180deg, #3a3a4a 0%, #2a2a3a 100%);
+    border-color: @border_bright;
+    box-shadow: 0 0 8px @accent_glow;
+}
+
+scrollbar slider:active {
+    background: @accent_color;
+}
+
+/* ===== PROGRESS BARS ===== */
+progressbar {
+    color: @fg_color;
+}
+
+progressbar trough {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 4px;
+    min-height: 8px;
+}
+
+progressbar progress {
+    background: linear-gradient(90deg, @accent_color 0%, @accent_secondary 100%);
+    border-radius: 3px;
+    box-shadow: 0 0 10px @accent_glow;
+}
+
+/* ===== SCALE / SLIDERS ===== */
+scale {
+    padding: 10px 0;
+}
+
+scale trough {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 4px;
+    min-height: 6px;
+    min-width: 6px;
+}
+
+scale highlight {
+    background: @accent_color;
+    border-radius: 4px;
+    box-shadow: 0 0 8px @accent_glow;
+}
+
+scale slider {
+    background: linear-gradient(180deg, #2a2a3a 0%, #1a1a2a 100%);
+    border: 2px solid @accent_color;
+    border-radius: 50%;
+    min-width: 20px;
+    min-height: 20px;
+    transition: all 0.2s ease;
+}
+
+scale slider:hover {
+    background: @accent_color;
+    box-shadow: 0 0 15px @accent_glow;
+}
+
+/* ===== SWITCHES ===== */
+switch {
+    background: @bg_dark;
+    border: 2px solid @border_color;
+    border-radius: 20px;
+    min-width: 50px;
+    min-height: 26px;
+    transition: all 0.3s ease;
+}
+
+switch:checked {
+    background: linear-gradient(90deg, @accent_dim 0%, @accent_color 100%);
+    border-color: @accent_color;
+    box-shadow: 0 0 15px @accent_glow;
+}
+
+switch slider {
+    background: @fg_color;
+    border-radius: 50%;
+    min-width: 22px;
+    min-height: 22px;
+    margin: 0 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+switch:checked slider {
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== CHECK & RADIO BUTTONS ===== */
+checkbutton, radiobutton {
+    color: @fg_color;
+}
+
+check, radio {
+    background: @bg_dark;
+    border: 2px solid @border_color;
+    min-width: 20px;
+    min-height: 20px;
+    transition: all 0.2s ease;
+}
+
+check {
+    border-radius: 4px;
+}
+
+radio {
+    border-radius: 50%;
+}
+
+check:hover, radio:hover {
+    border-color: @accent_color;
+    box-shadow: 0 0 10px @accent_glow;
+}
+
+check:checked, radio:checked {
+    background: @accent_color;
+    border-color: @accent_color;
+    color: #000000;
+}
+
+check:checked {
+    -gtk-icon-source: -gtk-icontheme("object-select-symbolic");
+}
+
+/* ===== MENUS ===== */
+menu, .menu, .context-menu, popover.menu {
+    background: linear-gradient(180deg, #151520 0%, #0a0a0f 100%);
+    border: 1px solid @border_color;
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+                0 0 1px @accent_glow;
+}
+
+menuitem {
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: @fg_color;
+    transition: all 0.15s ease;
+}
+
+menuitem:hover {
+    background: @selection_color;
+    color: @accent_color;
+}
+
+menuitem:disabled {
+    color: @fg_dim;
+}
+
+separator {
+    background: @border_color;
+    min-height: 1px;
+    margin: 4px 8px;
+}
+
+/* ===== POPOVERS ===== */
+popover, popover.background {
+    background: linear-gradient(180deg, #151520 0%, #0a0a0f 100%);
+    border: 1px solid @border_color;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6),
+                0 0 20px rgba(0, 255, 0, 0.05);
+}
+
+popover arrow {
+    background: @bg_light;
+    border-color: @border_color;
+}
+
+/* ===== TOOLTIPS ===== */
+tooltip {
+    background: linear-gradient(180deg, #1a1a25 0%, #0f0f18 100%);
+    border: 1px solid @border_bright;
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: @accent_color;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5),
+                0 0 10px @accent_glow;
+}
+
+tooltip label {
+    color: @fg_color;
+}
+
+/* ===== NOTEBOOKS / TABS ===== */
+notebook {
+    background: @bg_color;
+}
+
+notebook header {
+    background: @bg_dark;
+    border-bottom: 1px solid @border_color;
+}
+
+notebook header tabs {
+    background: transparent;
+}
+
+notebook tab {
+    background: transparent;
+    border: none;
+    padding: 2px 10px;
+    min-height: 16px;
+    color: @fg_dim;
+    transition: all 0.2s ease;
+}
+
+notebook tab:hover {
+    color: @fg_color;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+notebook tab:checked {
+    color: @accent_color;
+    border-bottom: 2px solid @accent_color;
+    box-shadow: 0 2px 10px @accent_glow;
+}
+
+notebook stack {
+    background: @bg_color;
+}
+
+/* ===== SIDEBARS ===== */
+.sidebar {
+    background: @bg_dark;
+    border-right: 1px solid @border_color;
+}
+
+.sidebar row {
+    padding: 10px 12px;
+}
+
+.sidebar row:selected {
+    background: @selection_color;
+}
+
+/* ===== SPINBUTTONS ===== */
+spinbutton {
+    background: @bg_dark;
+    border: 2px solid @border_color;
+    border-radius: 6px;
+    color: @fg_color;
+}
+
+spinbutton:focus {
+    border-color: @accent_color;
+    box-shadow: 0 0 15px @accent_glow;
+}
+
+spinbutton button {
+    background: transparent;
+    border: none;
+    color: @accent_color;
+}
+
+spinbutton button:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+/* ===== COMBOBOX ===== */
+combobox button {
+    padding-right: 12px;
+}
+
+combobox arrow {
+    color: @accent_color;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+dropdown button {
+    background: @bg_dark;
+    border: 2px solid @border_color;
+}
+
+dropdown button:focus {
+    border-color: @accent_color;
+}
+
+/* ===== TREEVIEW ===== */
+treeview {
+    background: @bg_color;
+    color: @fg_color;
+}
+
+treeview header button {
+    background: @bg_dark;
+    border-bottom: 1px solid @border_color;
+    font-weight: bold;
+}
+
+treeview:selected {
+    background: @selection_color;
+}
+
+/* ===== INFOBARS ===== */
+infobar {
+    border-radius: 6px;
+}
+
+infobar.info {
+    background: rgba(0, 150, 255, 0.2);
+    border: 1px solid rgba(0, 150, 255, 0.4);
+}
+
+infobar.warning {
+    background: rgba(255, 200, 0, 0.2);
+    border: 1px solid rgba(255, 200, 0, 0.4);
+}
+
+infobar.error {
+    background: rgba(255, 50, 50, 0.2);
+    border: 1px solid rgba(255, 50, 50, 0.4);
+}
+
+infobar.question {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid @border_color;
+}
+
+/* ===== DIALOGS ===== */
+dialog, messagedialog {
+    background: @bg_color;
+}
+
+messagedialog .titlebar {
+    background: @bg_dark;
+    border-bottom: 1px solid @border_color;
+}
+
+/* ===== CALENDAR ===== */
+calendar {
+    background: @bg_color;
+    color: @fg_color;
+    border: 1px solid @border_color;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+calendar:selected {
+    background: @accent_color;
+    color: #000000;
+    border-radius: 50%;
+}
+
+calendar.header {
+    color: @accent_color;
+    font-weight: bold;
+}
+
+calendar.button {
+    color: @accent_color;
+}
+
+calendar:indeterminate {
+    color: @fg_dim;
+}
+
+/* ===== LEVELBAR ===== */
+levelbar trough {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 4px;
+}
+
+levelbar block {
+    border-radius: 3px;
+}
+
+levelbar block.filled {
+    background: @accent_color;
+    box-shadow: 0 0 8px @accent_glow;
+}
+
+levelbar block.empty {
+    background: transparent;
+}
+
+/* ===== FRAME ===== */
+frame border {
+    border: 1px solid @border_color;
+    border-radius: 8px;
+}
+
+/* ===== EXPANDER ===== */
+expander title {
+    color: @fg_color;
+}
+
+expander arrow {
+    color: @accent_color;
+    transition: all 0.2s ease;
+}
+
+expander arrow:hover {
+    color: @accent_secondary;
+}
+
+/* ===== REVEALER ===== */
+revealer > * {
+    transition: all 0.3s ease;
+}
+
+/* ===== STATUSBAR ===== */
+statusbar {
+    background: @bg_dark;
+    border-top: 1px solid @border_color;
+    padding: 4px 8px;
+    color: @fg_dim;
+}
+
+/* ===== TERMINAL ===== */
+VteTerminal, TerminalScreen, vte-terminal {
+    padding: 16px;
+    background-color: @bg_dark;
+    color: @accent_color;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+}
+
+/* ===== NAUTILUS / FILE MANAGER ===== */
+.nautilus-window .sidebar {
+    background: @bg_dark;
+}
+
+.nautilus-window .view {
+    background: @bg_color;
+}
+
+.nautilus-window .floating-bar {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 6px;
+    color: @fg_color;
+}
+
+/* Path bar */
+.path-bar button {
+    background: transparent;
+    border: none;
+    color: @fg_color;
+}
+
+.path-bar button:checked {
+    background: @selection_color;
+    color: @accent_color;
+}
+
+/* ===== OSD ===== */
+.osd {
+    background: rgba(10, 10, 15, 0.9);
+    border: 1px solid @border_color;
+    border-radius: 8px;
+    color: @fg_color;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.osd button {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid @border_color;
+}
+
+.osd button:hover {
+    background: rgba(0, 255, 0, 0.2);
+    border-color: @accent_color;
+}
+
+/* ===== SELECTION MODE ===== */
+.selection-mode {
+    background: @accent_color;
+    color: #000000;
+}
+
+.selection-mode headerbar {
+    background: linear-gradient(180deg, @accent_color 0%, @accent_dim 100%);
+}
+
+.selection-mode headerbar button {
+    color: #000000;
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* ===== SEARCH ===== */
+searchbar {
+    background: @bg_dark;
+    border-bottom: 1px solid @border_color;
+    padding: 6px;
+}
+
+searchbar entry {
+    background: @bg_color;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px @accent_glow; }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Applied to focused elements */
+*:focus {
+    outline: none;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ===== APP SPECIFIC FIXES ===== */
+/* Firefox */
+#MozillaGtkWidget > widget > * {
+    color: @fg_color;
+}
+
+/* Chromium */
+.chromium {
+    background-color: @bg_color;
+}

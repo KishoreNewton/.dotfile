@@ -1,0 +1,158 @@
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus";
+    display-drun: "Apps";
+    drun-display-format: "{name}";
+}
+
+* {
+    font: "JetBrains Mono Bold 13";
+
+    bg0:     rgba(0, 0, 0, 0.85);
+    bg1:     rgba(0, 255, 0, 0.1);
+    bg2:     rgba(0, 255, 0, 0.2);
+
+    fg0:     #00ff00;
+    fg1:     #00dd00;
+    fg2:     #00cc00;
+
+    accent:  #00ff00;
+    urgent:  #ff0000;
+
+    background-color: transparent;
+    text-color:       @fg0;
+}
+
+window {
+    background-color: @bg0;
+    border:           2px solid;
+    border-color:     rgba(0, 255, 0, 0.3);
+    border-radius:    0px;
+    width:            600px;
+    padding:          0px;
+}
+
+mainbox {
+    background-color: transparent;
+    children:         [ inputbar, message, listview ];
+    spacing:          0px;
+}
+
+inputbar {
+    background-color: transparent;
+    border:           0 0 2px 0;
+    border-color:     @accent;
+    padding:          12px;
+    spacing:          12px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    background-color: @bg1;
+    padding:          6px 12px;
+    text-color:       @accent;
+}
+
+entry {
+    background-color: transparent;
+    padding:          6px;
+    text-color:       @fg0;
+    placeholder:      "Search...";
+    placeholder-color: @fg2;
+}
+
+message {
+    background-color: @bg1;
+    border:           0 0 2px 0;
+    border-color:     @accent;
+    padding:          12px;
+}
+
+textbox {
+    background-color: transparent;
+    text-color:       @fg1;
+}
+
+listview {
+    background-color: transparent;
+    columns:          1;
+    lines:            8;
+    padding:          8px 0;
+    scrollbar:        true;
+    spacing:          0px;
+}
+
+scrollbar {
+    background-color: @bg1;
+    handle-color:     @accent;
+    handle-width:     4px;
+    margin:           0 0 0 4px;
+}
+
+element {
+    background-color: transparent;
+    padding:          10px 12px;
+    spacing:          12px;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @fg1;
+}
+
+element normal.urgent {
+    background-color: transparent;
+    text-color:       @urgent;
+}
+
+element normal.active {
+    background-color: @bg1;
+    text-color:       @accent;
+}
+
+element selected.normal {
+    background-color: @bg2;
+    text-color:       @accent;
+    border:           0 0 0 2px;
+    border-color:     @accent;
+}
+
+element selected.urgent {
+    background-color: @bg2;
+    text-color:       @urgent;
+    border:           0 0 0 2px;
+    border-color:     @urgent;
+}
+
+element selected.active {
+    background-color: @bg2;
+    text-color:       @accent;
+    border:           0 0 0 2px;
+    border-color:     @accent;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @fg1;
+}
+
+element alternate.urgent {
+    background-color: transparent;
+    text-color:       @urgent;
+}
+
+element alternate.active {
+    background-color: @bg1;
+    text-color:       @accent;
+}
+
+element-icon {
+    background-color: transparent;
+    size:             24px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
