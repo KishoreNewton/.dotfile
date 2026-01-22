@@ -1,0 +1,43 @@
+/**
+ * Rofi Configuration for Hyprland
+ * Uses native Wayland layer blur
+ */
+
+configuration {
+    /* Core settings */
+    modi:                 "drun,run,window,filebrowser";
+    show-icons:           true;
+    icon-theme:           "Papirus";
+    terminal:             "terminator";
+
+    /* Display format */
+    display-drun:         " Apps";
+    display-run:          " Run";
+    display-window:       " Windows";
+    display-filebrowser:  " Files";
+    drun-display-format:  "{name}";
+    window-format:        "{w} · {c} · {t}";
+
+    /* Behavior */
+    case-sensitive:       false;
+    cycle:                true;
+    filter:               "";
+    scroll-method:        0;
+    normalize-match:      true;
+    matching:             "fuzzy";
+    sort:                 true;
+    sorting-method:       "fzf";
+
+    /* Mouse interaction */
+    hover-select:         true;
+    me-select-entry:      "";
+    me-accept-entry:      "MousePrimary";
+
+    /* Key bindings */
+    kb-remove-to-eol:     "";
+    kb-accept-entry:      "Return,KP_Enter";
+    kb-row-up:            "Up,Control+k";
+    kb-row-down:          "Down,Control+j";
+}
+
+@theme "~/.config/rofi/themes/hacker-green.rasi"

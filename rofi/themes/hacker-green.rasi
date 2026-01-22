@@ -1,48 +1,50 @@
+/**
+ * Hacker Green Theme for Rofi
+ * Optimized for Hyprland native blur
+ */
+
 configuration {
-    show-icons: true;
-    icon-theme: "Papirus";
-    display-drun: "Apps";
-    display-run: "Run";
-    display-window: "Windows";
-    display-filebrowser: "Files";
-    drun-display-format: "{name}";
-    hover-select: true;
-    me-select-entry: "";
-    me-accept-entry: "MousePrimary";
+    show-icons:           true;
+    icon-theme:           "Papirus";
+    display-drun:         " Apps";
+    display-run:          " Run";
+    display-window:       " Windows";
+    display-filebrowser:  " Files";
+    drun-display-format:  "{name}";
+    hover-select:         true;
+    me-select-entry:      "";
+    me-accept-entry:      "MousePrimary";
 }
 
 * {
-    font: "JetBrains Mono Bold 12";
+    font: "JetBrainsMono Nerd Font Bold 12";
 
-    bg0:     rgba(10, 10, 15, 0.92);
-    bg1:     rgba(0, 255, 0, 0.08);
-    bg2:     rgba(0, 255, 0, 0.15);
-    bg3:     rgba(0, 255, 0, 0.25);
+    /* Colors - using transparency for Hyprland blur */
+    bg0:     rgba(10, 14, 20, 0.75);
+    bg1:     rgba(13, 17, 23, 0.65);
+    bg2:     rgba(0, 255, 65, 0.12);
+    bg3:     rgba(0, 255, 65, 0.22);
 
-    fg0:     #00ff00;
-    fg1:     #00dd00;
-    fg2:     #00aa00;
-    fg3:     #008800;
+    fg0:     #00ff41;
+    fg1:     #39ff14;
+    fg2:     #00d700;
+    fg3:     #228b22;
 
-    accent:  #00ff00;
+    accent:  #00ff41;
     urgent:  #ff3333;
-    warning: #ffcc00;
 
     background-color: transparent;
     text-color:       @fg0;
-
-    /* Animation timing */
-    transition: 200ms;
 }
 
 window {
+    transparency:     "real";
     background-color: @bg0;
-    border:           2px solid;
-    border-color:     rgba(0, 255, 0, 0.4);
-    border-radius:    8px;
-    width:            650px;
+    border:           2px;
+    border-color:     @accent;
+    border-radius:    12px;
+    width:            680px;
     padding:          0px;
-    box-shadow:       0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 0, 0.1);
 }
 
 mainbox {
@@ -52,33 +54,35 @@ mainbox {
 }
 
 inputbar {
-    background-color: transparent;
+    background-color: @bg1;
     border:           0 0 2px 0;
-    border-color:     @accent;
-    padding:          12px;
+    border-color:     rgba(0, 255, 65, 0.5);
+    border-radius:    10px 10px 0 0;
+    padding:          16px 20px;
     spacing:          12px;
     children:         [ prompt, entry ];
 }
 
 prompt {
-    background-color: @bg1;
-    padding:          6px 12px;
+    background-color: @bg2;
+    padding:          8px 14px;
+    border-radius:    6px;
     text-color:       @accent;
 }
 
 entry {
     background-color: transparent;
-    padding:          6px;
+    padding:          8px;
     text-color:       @fg0;
-    placeholder:      "Search...";
-    placeholder-color: @fg2;
+    placeholder:      ">>> EXECUTE COMMAND";
+    placeholder-color: @fg3;
 }
 
 message {
     background-color: @bg1;
-    border:           0 0 2px 0;
-    border-color:     @accent;
-    padding:          12px;
+    border:           0 0 1px 0;
+    border-color:     rgba(0, 255, 65, 0.3);
+    padding:          12px 16px;
 }
 
 textbox {
@@ -90,24 +94,26 @@ listview {
     background-color: transparent;
     columns:          1;
     lines:            10;
-    padding:          8px 0;
+    padding:          8px 4px;
     scrollbar:        true;
-    spacing:          2px;
+    spacing:          4px;
     fixed-height:     true;
     cycle:            true;
 }
 
 scrollbar {
-    background-color: @bg1;
+    background-color: rgba(0, 255, 65, 0.1);
     handle-color:     @accent;
-    handle-width:     4px;
-    margin:           0 0 0 4px;
+    handle-width:     6px;
+    border-radius:    3px;
+    margin:           0 4px 0 8px;
 }
 
 element {
     background-color: transparent;
-    padding:          10px 12px;
+    padding:          12px 16px;
     spacing:          12px;
+    border-radius:    6px;
 }
 
 element normal.normal {
@@ -121,28 +127,28 @@ element normal.urgent {
 }
 
 element normal.active {
-    background-color: @bg1;
+    background-color: @bg2;
     text-color:       @accent;
 }
 
 element selected.normal {
-    background-color: @bg2;
+    background-color: @bg3;
     text-color:       @accent;
-    border:           0 0 0 2px;
+    border:           0 0 0 3px;
     border-color:     @accent;
 }
 
 element selected.urgent {
-    background-color: @bg2;
+    background-color: rgba(255, 51, 51, 0.2);
     text-color:       @urgent;
-    border:           0 0 0 2px;
+    border:           0 0 0 3px;
     border-color:     @urgent;
 }
 
 element selected.active {
-    background-color: @bg2;
+    background-color: @bg3;
     text-color:       @accent;
-    border:           0 0 0 2px;
+    border:           0 0 0 3px;
     border-color:     @accent;
 }
 
@@ -157,13 +163,13 @@ element alternate.urgent {
 }
 
 element alternate.active {
-    background-color: @bg1;
+    background-color: @bg2;
     text-color:       @accent;
 }
 
 element-icon {
     background-color: transparent;
-    size:             24px;
+    size:             28px;
 }
 
 element-text {
@@ -172,41 +178,35 @@ element-text {
     vertical-align:   0.5;
 }
 
-/* ===== MODE SWITCHER ===== */
 mode-switcher {
-    background-color: transparent;
-    border:           2px 0 0 0;
-    border-color:     rgba(0, 255, 0, 0.2);
-    padding:          8px;
-    spacing:          8px;
+    background-color: @bg1;
+    border:           1px 0 0 0;
+    border-color:     rgba(0, 255, 65, 0.3);
+    border-radius:    0 0 10px 10px;
+    padding:          10px 12px;
+    spacing:          10px;
 }
 
 button {
-    background-color: @bg1;
-    text-color:       @fg2;
-    padding:          8px 16px;
-    border-radius:    4px;
-    border:           1px solid transparent;
-    cursor:           pointer;
-}
-
-button:hover {
     background-color: @bg2;
-    text-color:       @fg0;
-    border-color:     rgba(0, 255, 0, 0.3);
+    text-color:       @fg2;
+    padding:          10px 18px;
+    border-radius:    6px;
+    border:           1px;
+    border-color:     transparent;
 }
 
 button selected {
     background-color: @bg3;
     text-color:       @accent;
-    border:           1px solid @accent;
-    font-weight:      bold;
+    border:           1px;
+    border-color:     @accent;
 }
 
-/* ===== ERROR MESSAGE ===== */
 error-message {
     background-color: rgba(255, 51, 51, 0.15);
-    border:           2px solid @urgent;
+    border:           2px;
+    border-color:     @urgent;
     border-radius:    8px;
     padding:          16px;
 }
@@ -215,16 +215,9 @@ error-message textbox {
     text-color:       @urgent;
 }
 
-/* ===== NUM FILTERED / RESULTS ===== */
-num-filtered-rows, num-rows {
-    text-color:       @fg3;
-    font-style:       italic;
-}
-
-/* ===== TEXTBOX (calc mode etc) ===== */
 textbox-current-entry {
     background-color: @bg2;
     text-color:       @accent;
     padding:          12px;
-    border-radius:    4px;
+    border-radius:    6px;
 }
