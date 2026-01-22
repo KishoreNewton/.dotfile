@@ -7,14 +7,12 @@
     "margin": 0,
     "exclusive": true,
     
-    "modules-left": ["custom/arch", "hyprland/workspaces", "hyprland/window"],
+    "modules-left": ["custom/arch", "hyprland/workspaces", "hyprland/window", "mpris"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "memory", "disk", "network", "pulseaudio", "battery", "tray"],
+    "modules-right": ["privacy", "cpu", "temperature", "memory", "disk", "network", "bluetooth", "pulseaudio", "backlight", "battery", "power-profiles-daemon", "idle_inhibitor", "tray"],
     
     "custom/arch": {
-        "format": " {} ",
-        "exec": "echo '󰣇'",
-        "interval": "once",
+        "format": "<span size='large'>󰣇</span>",
         "tooltip": false
     },
     
@@ -29,15 +27,15 @@
     },
     
     "hyprland/window": {
-        "format": ">> {}",
+        "format": "<span size='large'></span> {}",
         "max-length": 50,
         "separate-outputs": true
     },
     
     "clock": {
         "interval": 1,
-        "format": "[{:%H:%M:%S}]",
-        "format-alt": "[{:%Y-%m-%d %H:%M:%S}]",
+        "format": "<span size='large'></span> {:%H:%M:%S}",
+        "format-alt": "<span size='large'></span> {:%Y-%m-%d %H:%M:%S}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode": "month",
@@ -55,49 +53,55 @@
     },
     
     "cpu": {
-        "interval": 1,
-        "format": "CPU:[{usage}%]",
+        "interval": 2,
+        "format": "<span size='large'>󰍛</span> {usage}%",
         "tooltip": true,
-        "on-click": "terminator -e htop"
+        "on-click": "terminator -e btop"
     },
 
     "memory": {
-        "interval": 1,
-        "format": "RAM:[{percentage}%]",
-        "format-alt": "RAM:[{used:0.1f}G/{total:0.1f}G]",
+        "interval": 3,
+        "format": "<span size='large'>󰘚</span> {percentage}%",
+        "format-alt": "<span size='large'>󰘚</span> {used:0.1f}G/{total:0.1f}G",
         "tooltip": true,
         "tooltip-format": "Used: {used:0.1f}GB\nFree: {avail:0.1f}GB\nTotal: {total:0.1f}GB"
     },
 
     "disk": {
         "interval": 30,
-        "format": "DISK:[{percentage_used}%]",
+        "format": "<span size='large'>󰋊</span> {percentage_used}%",
         "path": "/",
         "tooltip": true,
         "tooltip-format": "Used: {used}\nFree: {free}\nTotal: {total}"
     },
-    
+
     "network": {
         "format": "{ifname}",
-        "format-wifi": "NET:[{signalStrength}%]",
-        "format-ethernet": "NET:[Connected]",
-        "format-disconnected": "NET:[OFFLINE]",
+        "format-wifi": "<span size='large'>{icon}</span> {essid}",
+        "format-ethernet": "<span size='large'>󰈀</span> {ipaddr}",
+        "format-disconnected": "<span size='large'>󰤭</span> Offline",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
         "tooltip": true,
-        "tooltip-format": "{ifname}\n{ipaddr}/{cidr}\n↑{bandwidthUpBytes} ↓{bandwidthDownBytes}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}\n󰕒 {bandwidthUpBytes}  󰇚 {bandwidthDownBytes}",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}\n󰕒 {bandwidthUpBytes}  󰇚 {bandwidthDownBytes}",
+        "tooltip-format-disconnected": "Disconnected",
         "on-click": "terminator -e nmtui",
-        "interval": 1
+        "interval": 3
     },
 
     "pulseaudio": {
-        "format": "VOL:[{volume}%]",
-        "format-muted": "VOL:[MUTED]",
+        "format": "<span size='large'>{icon}</span> {volume}%",
+        "format-muted": "<span size='large'>󰝟</span> Muted",
         "format-icons": {
-            "default": ["", "", ""]
+            "headphone": "󰋋",
+            "headset": "󰋎",
+            "default": ["󰕿", "󰖀", "󰕾"]
         },
         "on-click": "pavucontrol",
         "on-click-right": "pamixer -t",
         "scroll-step": 5,
-        "tooltip": true
+        "tooltip": true,
+        "tooltip-format": "{icon} {volume}% - {desc}"
     },
 
     "battery": {
@@ -105,10 +109,11 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "PWR:[{capacity}%]",
-        "format-charging": "PWR:[{capacity}%+]",
-        "format-plugged": "PWR:[AC]",
-        "format-alt": "PWR:[{time}]",
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥 {capacity}%",
+        "format-alt": " {time}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
         "tooltip": true,
         "tooltip-format": "{capacity}%\n{timeTo}"
     },
@@ -116,5 +121,103 @@
     "tray": {
         "icon-size": 16,
         "spacing": 8
+    },
+
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "<span size='large'>{icon}</span> {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "tooltip": true,
+        "tooltip-format": "Brightness: {percent}%",
+        "scroll-step": 5
+    },
+
+    "bluetooth": {
+        "format": "<span size='large'>󰂯</span>",
+        "format-disabled": "<span size='large'>󰂲</span>",
+        "format-connected": "<span size='large'>󰂱</span> {num_connections}",
+        "format-connected-battery": "<span size='large'>󰂱</span> {device_battery_percentage}%",
+        "tooltip-format": "{controller_alias}\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias} ({device_battery_percentage}%)",
+        "on-click": "blueman-manager"
+    },
+
+    "idle_inhibitor": {
+        "format": "<span size='large'>{icon}</span>",
+        "format-icons": {
+            "activated": "󰅶",
+            "deactivated": "󰾪"
+        },
+        "tooltip-format-activated": "Idle inhibitor: ON",
+        "tooltip-format-deactivated": "Idle inhibitor: OFF"
+    },
+
+    "temperature": {
+        "interval": 5,
+        "thermal-zone": 0,
+        "critical-threshold": 90,
+        "format": "<span size='large'>{icon}</span> {temperatureC}°C",
+        "format-critical": "<span size='large'></span> {temperatureC}°C",
+        "format-icons": ["", "", ""],
+        "tooltip": true,
+        "tooltip-format": "CPU: {temperatureC}°C"
+    },
+
+    "mpris": {
+        "format": "<span size='large'>{player_icon}</span> {dynamic}",
+        "format-paused": "<span size='large'>{player_icon}</span> <i>{dynamic}</i>",
+        "dynamic-order": ["title", "artist"],
+        "dynamic-len": 30,
+        "player-icons": {
+            "default": "󰎆",
+            "spotify": "󰓇",
+            "firefox": "󰈹",
+            "chromium": "󰊯"
+        },
+        "status-icons": {
+            "paused": "󰏤",
+            "playing": "󰐊"
+        },
+        "tooltip-format": "{player} - {title} by {artist}",
+        "on-click": "playerctld shift",
+        "on-click-middle": "playerctl play-pause",
+        "on-click-right": "playerctl next"
+    },
+
+    "power-profiles-daemon": {
+        "format": "<span size='large'>{icon}</span>",
+        "format-icons": {
+            "default": "󰗑",
+            "performance": "󱐋",
+            "balanced": "󰗑",
+            "power-saver": "󰌪"
+        },
+        "tooltip": true,
+        "tooltip-format": "Profile: {profile}\nDriver: {driver}"
+    },
+
+    "privacy": {
+        "icon-size": 14,
+        "icon-spacing": 6,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 16
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 16
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 16
+            }
+        ]
     }
 }

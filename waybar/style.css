@@ -1,5 +1,5 @@
 * {
-    font-family: "JetBrains Mono", "Hack", "Fira Code", monospace;
+    font-family: "JetBrainsMono Nerd Font Mono", "JetBrains Mono", monospace;
     font-size: 13px;
     font-weight: bold;
     border: none;
@@ -32,6 +32,7 @@ window#waybar.hidden {
     color: #00ff00;
     border-bottom: 2px solid transparent;
     min-width: 30px;
+    transition: all 0.2s ease;
 }
 
 #workspaces button:hover {
@@ -50,6 +51,10 @@ window#waybar.hidden {
     background-color: rgba(255, 0, 0, 0.3);
     color: #ff0000;
     animation: blink 1s ease-in-out infinite;
+}
+
+#workspaces button.empty {
+    color: #005500;
 }
 
 /* Window title */
@@ -75,15 +80,17 @@ window#waybar.hidden {
 #disk,
 #network,
 #pulseaudio,
-#battery {
+#battery,
+#backlight,
+#bluetooth,
+#temperature,
+#power-profiles-daemon,
+#idle_inhibitor {
     padding: 0 10px;
     color: #00ff00;
     background-color: transparent;
     margin: 0 2px;
-}
-
-#cpu {
-    color: #00ff00;
+    transition: all 0.3s ease;
 }
 
 #memory {
@@ -94,15 +101,6 @@ window#waybar.hidden {
     color: #00cc00;
 }
 
-#network {
-    color: #00ff00;
-}
-
-#network.disconnected {
-    color: #ff0000;
-    animation: blink 2s ease-in-out infinite;
-}
-
 #pulseaudio {
     color: #00ee00;
 }
@@ -111,8 +109,9 @@ window#waybar.hidden {
     color: #666666;
 }
 
-#battery {
-    color: #00ff00;
+#network.disconnected {
+    color: #ff0000;
+    animation: blink 2s ease-in-out infinite;
 }
 
 #battery.charging {
@@ -128,6 +127,81 @@ window#waybar.hidden {
 #battery.critical:not(.charging) {
     color: #ff0000;
     animation: blink 0.5s ease-in-out infinite;
+}
+
+/* Backlight */
+#backlight {
+    color: #00ffaa;
+}
+
+/* Bluetooth */
+#bluetooth {
+    color: #00aaff;
+}
+
+#bluetooth.disabled {
+    color: #666666;
+}
+
+#bluetooth.connected {
+    color: #00ffaa;
+}
+
+/* Temperature */
+#temperature {
+    color: #00ff00;
+}
+
+#temperature.critical {
+    color: #ff0000;
+    animation: blink 0.5s ease-in-out infinite;
+}
+
+/* Power profiles */
+#power-profiles-daemon {
+    color: #00ff00;
+}
+
+#power-profiles-daemon.performance {
+    color: #ff5500;
+}
+
+#power-profiles-daemon.balanced {
+    color: #00ff00;
+}
+
+#power-profiles-daemon.power-saver {
+    color: #00aaff;
+}
+
+/* Idle inhibitor */
+#idle_inhibitor {
+    color: #666666;
+}
+
+#idle_inhibitor.activated {
+    color: #ffaa00;
+    text-shadow: 0 0 5px #ffaa00;
+}
+
+/* MPRIS media player */
+#mpris {
+    color: #00cc00;
+    font-style: italic;
+    padding: 0 10px;
+}
+
+#mpris.paused {
+    color: #888888;
+}
+
+/* Privacy indicators */
+#privacy {
+    padding: 0 10px;
+}
+
+#privacy-item {
+    color: #ff5500;
 }
 
 /* Custom modules */
@@ -185,7 +259,13 @@ window#waybar.hidden {
 #network:hover,
 #pulseaudio:hover,
 #battery:hover,
-#clock:hover {
+#clock:hover,
+#backlight:hover,
+#bluetooth:hover,
+#temperature:hover,
+#power-profiles-daemon:hover,
+#idle_inhibitor:hover,
+#mpris:hover {
     background-color: rgba(0, 255, 0, 0.1);
     text-shadow: 0 0 10px #00ff00;
 }
@@ -200,6 +280,6 @@ tooltip {
 
 tooltip label {
     color: #00ff00;
-    font-family: "JetBrains Mono", monospace;
+    font-family: "JetBrainsMono Nerd Font Mono", monospace;
     font-size: 12px;
 }
