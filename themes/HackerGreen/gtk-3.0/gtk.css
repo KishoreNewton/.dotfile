@@ -624,6 +624,77 @@ GtkEntryCompletion {
     background: @bg_dark;
 }
 
+/* Entry completion popup window */
+window.popup, window.completion {
+    background: @bg_dark;
+    border: 1px solid @accent_color;
+    border-radius: 6px;
+}
+
+window.popup .view,
+window.completion .view {
+    background: @bg_dark;
+    color: @fg_color;
+}
+
+window.popup .view:selected,
+window.popup .view:hover,
+window.completion .view:selected,
+window.completion .view:hover {
+    background: @accent_color;
+    color: #000000;
+}
+
+/* Treeview in completion */
+window.popup treeview,
+window.completion treeview {
+    background: @bg_dark;
+    color: @fg_color;
+}
+
+window.popup treeview:selected,
+window.popup treeview:hover,
+window.completion treeview:selected,
+window.completion treeview:hover {
+    background: @accent_color;
+    color: #000000;
+}
+
+window.popup treeview row:selected,
+window.completion treeview row:selected {
+    background: @accent_color;
+    color: #000000;
+}
+
+/* Cell renderer in autocomplete */
+window.popup .cell,
+window.completion .cell {
+    color: @fg_color;
+}
+
+window.popup .cell:selected,
+window.completion .cell:selected {
+    background: @accent_color;
+    color: #000000;
+}
+
+/* GtkTreeView selection */
+treeview.view:selected,
+treeview.view:selected:focus {
+    background: @accent_color;
+    color: #000000;
+}
+
+treeview.view:hover {
+    background: rgba(0, 255, 0, 0.15);
+}
+
+/* CellRendererText selection */
+cellrenderertext:selected {
+    background: @accent_color;
+    color: #000000;
+}
+
 /* Dropdown/Popover list */
 dropdown popover, combobox popover {
     background: @bg_dark;

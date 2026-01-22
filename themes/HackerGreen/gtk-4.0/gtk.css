@@ -540,6 +540,50 @@ entry > popover > contents listview row:selected {
     color: #000000;
 }
 
+/* Completion popup window */
+window.popup, window.completion {
+    background: @view_bg_color;
+    border: 1px solid @accent_color;
+    border-radius: 6px;
+}
+
+window.popup listview,
+window.completion listview {
+    background: @view_bg_color;
+}
+
+window.popup listview > row,
+window.completion listview > row {
+    padding: 8px 12px;
+    color: @window_fg_color;
+}
+
+window.popup listview > row:selected,
+window.popup listview > row:hover,
+window.completion listview > row:selected,
+window.completion listview > row:hover {
+    background: @accent_color;
+    color: #000000;
+}
+
+/* Columnview in completion (GTK4) */
+columnview {
+    background: @view_bg_color;
+}
+
+columnview > listview > row {
+    color: @window_fg_color;
+}
+
+columnview > listview > row:selected {
+    background: @accent_color;
+    color: #000000;
+}
+
+columnview > listview > row:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
 /* Listbox in dropdowns */
 listbox {
     background: @view_bg_color;
