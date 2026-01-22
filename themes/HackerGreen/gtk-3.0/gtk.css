@@ -15,10 +15,23 @@
 @define-color accent_secondary #00ff88;
 @define-color border_color rgba(0, 255, 0, 0.2);
 @define-color border_bright rgba(0, 255, 0, 0.4);
-@define-color selection_color rgba(0, 255, 0, 0.25);
 @define-color error_color #ff3333;
 @define-color warning_color #ffcc00;
 @define-color success_color #00ff00;
+
+/* Standard GTK selection colors - required for browsers */
+@define-color selected_bg_color #00aa00;
+@define-color selected_fg_color #ffffff;
+@define-color theme_selected_bg_color @selected_bg_color;
+@define-color theme_selected_fg_color @selected_fg_color;
+
+/* Base/text colors for compatibility */
+@define-color base_color #0a0a0f;
+@define-color text_color #e0e0e0;
+@define-color theme_base_color @base_color;
+@define-color theme_text_color @text_color;
+@define-color theme_bg_color @bg_color;
+@define-color theme_fg_color @fg_color;
 
 /* ===== GLOBAL STYLES ===== */
 * {
@@ -27,6 +40,18 @@
     outline-style: none;
     outline-width: 0;
     font-family: "JetBrains Mono", "Fira Code", "Cantarell", sans-serif;
+}
+
+/* Global selection styling */
+*:selected,
+*:selected:focus {
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+}
+
+selection {
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
 }
 
 /* ===== WINDOW ===== */

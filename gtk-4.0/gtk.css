@@ -81,7 +81,13 @@ headerbar .title {
 
 /* Selection */
 selection {
-    background-color: rgba(0, 255, 0, 0.25);
+    background-color: rgba(0, 255, 0, 0.45);
+    color: #ffffff;
+}
+
+*::selection {
+    background-color: rgba(0, 255, 0, 0.45);
+    color: #ffffff;
 }
 
 /* Links */
