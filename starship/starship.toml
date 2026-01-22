@@ -26,14 +26,14 @@ $character"""
 # Username and hostname
 [username]
 show_always = true
-style_user = "bold green"
+style_user = "bold #00ff00"
 style_root = "bold red"
 format = "[$user]($style)"
 
 [hostname]
 ssh_only = false
 format = "@[$hostname]($style)"
-style = "bold green"
+style = "bold #00ff00"
 
 # Directory
 [directory]
@@ -123,5 +123,5 @@ disabled = false
 
 # Character prompt indicator
 [character]
-success_symbol = "[❯](bright-green)"
-error_symbol = "[❯](bright-red)"
+success_symbol = "[❯](#00ff00)"
+error_symbol = "[❯](#ff3333)"

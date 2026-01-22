@@ -9,13 +9,55 @@ endif
 let g:colors_name = "hackertheme"
 " Hacker Theme Color Scheme 
 "
-" Popup Menu
+" Popup Menu / Autocomplete
 hi Normal ctermbg=NONE guibg=NONE
 hi Visual term=none cterm=none guibg=#FFFFFF  guifg=#000000
-highlight Pmenu guibg=#3C3C60 guifg=#FFFFFF
-highlight PmenuSel guibg=#5C5C80 guifg=#FFFFFF
+highlight Pmenu guibg=#0a0a0f guifg=#e0e0e0
+highlight PmenuSel guibg=#00ff00 guifg=#000000 gui=bold
+highlight PmenuSbar guibg=#151520
+highlight PmenuThumb guibg=#00ff00
+
+" Completion Menu (nvim-cmp)
+highlight CmpItemAbbr guifg=#e0e0e0
+highlight CmpItemAbbrDeprecated guifg=#808080 gui=strikethrough
+highlight CmpItemAbbrMatch guifg=#00ff00 gui=bold
+highlight CmpItemAbbrMatchFuzzy guifg=#00dd00 gui=bold
+highlight CmpItemKind guifg=#00ff88
+highlight CmpItemMenu guifg=#808080 gui=italic
+
+" Completion Item Kinds
+highlight CmpItemKindText guifg=#e0e0e0
+highlight CmpItemKindMethod guifg=#9DE0AD
+highlight CmpItemKindFunction guifg=#9DE0AD
+highlight CmpItemKindConstructor guifg=#FB7BBE
+highlight CmpItemKindField guifg=#FFE5B4
+highlight CmpItemKindVariable guifg=#00ff00
+highlight CmpItemKindClass guifg=#FB7BBE
+highlight CmpItemKindInterface guifg=#86E3CE
+highlight CmpItemKindModule guifg=#A9D0F5
+highlight CmpItemKindProperty guifg=#FFE5B4
+highlight CmpItemKindUnit guifg=#EFF0EB
+highlight CmpItemKindValue guifg=#EFF0EB
+highlight CmpItemKindEnum guifg=#CCABD8
+highlight CmpItemKindKeyword guifg=#A9D0F5
+highlight CmpItemKindSnippet guifg=#FF9CDA
+highlight CmpItemKindColor guifg=#FFF066
+highlight CmpItemKindFile guifg=#4FC1FF
+highlight CmpItemKindReference guifg=#AAB6FB
+highlight CmpItemKindFolder guifg=#4FC1FF
+highlight CmpItemKindEnumMember guifg=#CCABD8
+highlight CmpItemKindConstant guifg=#EFF0EB gui=bold
+highlight CmpItemKindStruct guifg=#FB7BBE
+highlight CmpItemKindEvent guifg=#FAA7B8
+highlight CmpItemKindOperator guifg=#FFDCA2
+highlight CmpItemKindTypeParameter guifg=#86E3CE
+
+" Float Window (documentation popup)
+highlight NormalFloat guibg=#0a0a0f guifg=#e0e0e0
+highlight FloatBorder guifg=#00ff00 guibg=#0a0a0f
+highlight FloatTitle guifg=#00ff00 guibg=#0a0a0f gui=bold
 " General Text
-highlight Normal guifg=#53cd38
+highlight Normal guifg=#00ff00
 highlight Comment guifg=#D1D1D1 gui=italic
 highlight String guifg=#FFF066
 " Syntax Elements
@@ -46,7 +88,7 @@ highlight TabLineFill guifg=#111111 guibg=#000000 ctermfg=254 ctermbg=238
 " LSP Colors
 " hi @lsp.type.function guifg=Yellow
 " hi @lsp.type.variable.lua guifg=Green
-hi @lsp.type.variable guifg=#32CD32
+hi @lsp.type.variable guifg=#00ff00
 " hi @lsp.mod.deprecated gui=strikethrough
 " hi @lsp.typemod.function.async guifg=#FF0000
 " Spell Checking

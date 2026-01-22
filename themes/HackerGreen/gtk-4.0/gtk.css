@@ -387,8 +387,8 @@ notebook > header {
 
 notebook > header > tabs > tab {
     background: transparent;
-    padding: 2px 10px;
-    min-height: 16px;
+    padding: 1px 8px;
+    min-height: 12px;
     color: @fg_dim;
     transition: all 200ms ease;
 }
@@ -495,4 +495,312 @@ infobar.warning {
 infobar.error {
     background: rgba(255, 50, 50, 0.2);
     border: 1px solid @error_color;
+}
+
+/* ===== AUTOCOMPLETE / COMPLETION ===== */
+dropdown > popover > contents {
+    background: @view_bg_color;
+    border: 1px solid @borders;
+    padding: 4px;
+}
+
+dropdown > popover > contents > listview {
+    background: transparent;
+}
+
+dropdown > popover > contents > listview > row {
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 2px;
+    color: @window_fg_color;
+}
+
+dropdown > popover > contents > listview > row:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+dropdown > popover > contents > listview > row:selected {
+    background: @accent_color;
+    color: #000000;
+}
+
+/* Entry completion */
+entry > popover > contents {
+    background: @view_bg_color;
+    border: 1px solid @borders;
+}
+
+entry > popover > contents listview row {
+    padding: 6px 10px;
+    color: @window_fg_color;
+}
+
+entry > popover > contents listview row:selected {
+    background: @accent_color;
+    color: #000000;
+}
+
+/* Listbox in dropdowns */
+listbox {
+    background: @view_bg_color;
+}
+
+listbox > row {
+    padding: 6px 10px;
+    color: @window_fg_color;
+}
+
+listbox > row:hover {
+    background: rgba(0, 255, 0, 0.08);
+}
+
+listbox > row:selected {
+    background: rgba(0, 255, 0, 0.2);
+    color: @accent_color;
+}
+
+/* ===== INDETERMINATE STATES ===== */
+check:indeterminate {
+    background: linear-gradient(135deg, @accent_color 0%, @accent_dim 100%);
+    border-color: @accent_color;
+}
+
+progressbar > trough > progress:indeterminate {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        @accent_color 30%,
+        @accent_color 70%,
+        transparent 100%);
+    animation: progress-indeterminate 1.5s linear infinite;
+}
+
+@keyframes progress-indeterminate {
+    0% { margin-left: -30%; margin-right: 100%; }
+    50% { margin-left: 30%; margin-right: 30%; }
+    100% { margin-left: 100%; margin-right: -30%; }
+}
+
+/* ===== FOCUS VISIBLE ===== */
+*:focus-visible {
+    outline: 2px solid @accent_color;
+    outline-offset: 2px;
+}
+
+button:focus-visible {
+    outline: 2px solid @accent_color;
+    outline-offset: 2px;
+    box-shadow: 0 0 12px @accent_glow;
+}
+
+entry:focus-visible {
+    border-color: @accent_color;
+    box-shadow: 0 0 15px @accent_glow, 0 0 0 2px rgba(0, 255, 0, 0.2);
+}
+
+row:focus-visible {
+    outline: 2px solid @accent_color;
+    outline-offset: -2px;
+}
+
+/* ===== RUBBERBAND ===== */
+rubberband {
+    background-color: rgba(0, 255, 0, 0.15);
+    border: 1px solid @accent_color;
+}
+
+/* ===== DRAG AND DROP ===== */
+row:drop(active) {
+    border: 2px solid @accent_color;
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.view:drop(active) {
+    border: 2px dashed @accent_color;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+/* ===== OVERSHOOT ===== */
+scrolledwindow > overshoot.top {
+    background: linear-gradient(to bottom, rgba(0, 255, 0, 0.2), transparent);
+}
+
+scrolledwindow > overshoot.bottom {
+    background: linear-gradient(to top, rgba(0, 255, 0, 0.2), transparent);
+}
+
+scrolledwindow > overshoot.left {
+    background: linear-gradient(to right, rgba(0, 255, 0, 0.2), transparent);
+}
+
+scrolledwindow > overshoot.right {
+    background: linear-gradient(to left, rgba(0, 255, 0, 0.2), transparent);
+}
+
+scrolledwindow > undershoot.top {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent);
+}
+
+scrolledwindow > undershoot.bottom {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+}
+
+/* ===== SPINNER ===== */
+spinner:checked {
+    animation: spinner-spin 1s linear infinite;
+}
+
+@keyframes spinner-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== TOOLBAR ===== */
+.toolbar {
+    background: @view_bg_color;
+    border-bottom: 1px solid @borders;
+    padding: 4px;
+}
+
+.toolbar button {
+    background: transparent;
+    border: none;
+}
+
+.toolbar button:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+/* ===== FILE CHOOSER ===== */
+filechooser placessidebar {
+    background: @sidebar_bg_color;
+}
+
+filechooser placessidebar row:selected {
+    background: rgba(0, 255, 0, 0.15);
+}
+
+filechooser .view {
+    background: @view_bg_color;
+}
+
+/* ===== FONT CHOOSER ===== */
+fontchooser .view:selected {
+    background: rgba(0, 255, 0, 0.15);
+}
+
+/* ===== COLOR CHOOSER ===== */
+colorchooser colorswatch:selected {
+    border: 2px solid @accent_color;
+    box-shadow: 0 0 8px @accent_glow;
+}
+
+/* ===== ABOUT DIALOG ===== */
+window.aboutdialog .main-logo {
+    padding: 16px;
+}
+
+window.aboutdialog .title {
+    color: @accent_color;
+    font-weight: bold;
+}
+
+/* ===== SHORTCUTS WINDOW ===== */
+shortcuts-window searchbar {
+    background: @view_bg_color;
+}
+
+shortcuts-group > label {
+    color: @accent_color;
+    font-weight: bold;
+}
+
+shortcut > box > label.keycap {
+    background: @view_bg_color;
+    border: 1px solid @borders;
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: @accent_color;
+}
+
+/* ===== MESSAGE DIALOG ===== */
+messagedialog .dialog-action-area {
+    background: @view_bg_color;
+    border-top: 1px solid @borders;
+}
+
+/* ===== PLACEHOLDER ===== */
+.placeholder {
+    color: @fg_dim;
+}
+
+/* ===== BANNER ===== */
+banner {
+    background: rgba(0, 255, 0, 0.1);
+    border-bottom: 1px solid @borders;
+}
+
+banner.error {
+    background: rgba(255, 51, 51, 0.15);
+}
+
+/* ===== STATUS PAGE ===== */
+statuspage {
+    background: @window_bg_color;
+}
+
+statuspage .icon {
+    color: @fg_dim;
+}
+
+/* ===== PREFERENCES ===== */
+preferencespage {
+    background: @window_bg_color;
+}
+
+preferencesgroup {
+    background: @card_bg_color;
+    border: 1px solid @borders;
+    border-radius: 12px;
+}
+
+/* ===== BACKDROP ===== */
+window:backdrop {
+    background-color: shade(@window_bg_color, 0.95);
+}
+
+window:backdrop headerbar {
+    background: @headerbar_bg_color;
+}
+
+window:backdrop headerbar .title {
+    color: @fg_dim;
+}
+
+window:backdrop button {
+    color: @fg_dim;
+}
+
+/* ===== VIEW SWITCHER ===== */
+viewswitcher button:checked {
+    background: rgba(0, 255, 0, 0.15);
+    color: @accent_color;
+}
+
+viewswitcherbar actionbar {
+    background: @view_bg_color;
+}
+
+/* ===== NAVIGATION VIEW ===== */
+navigationview > shadow {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+}
+
+/* ===== SPLIT VIEW ===== */
+separator.sidebar {
+    background: @borders;
+}
+
+/* ===== HEADER BAR FLAT ===== */
+headerbar.flat {
+    background: transparent;
+    border: none;
 }

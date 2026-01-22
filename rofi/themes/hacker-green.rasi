@@ -2,39 +2,52 @@ configuration {
     show-icons: true;
     icon-theme: "Papirus";
     display-drun: "Apps";
+    display-run: "Run";
+    display-window: "Windows";
+    display-filebrowser: "Files";
     drun-display-format: "{name}";
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
 }
 
 * {
-    font: "JetBrains Mono Bold 13";
+    font: "JetBrains Mono Bold 12";
 
-    bg0:     rgba(0, 0, 0, 0.85);
-    bg1:     rgba(0, 255, 0, 0.1);
-    bg2:     rgba(0, 255, 0, 0.2);
+    bg0:     rgba(10, 10, 15, 0.92);
+    bg1:     rgba(0, 255, 0, 0.08);
+    bg2:     rgba(0, 255, 0, 0.15);
+    bg3:     rgba(0, 255, 0, 0.25);
 
     fg0:     #00ff00;
     fg1:     #00dd00;
-    fg2:     #00cc00;
+    fg2:     #00aa00;
+    fg3:     #008800;
 
     accent:  #00ff00;
-    urgent:  #ff0000;
+    urgent:  #ff3333;
+    warning: #ffcc00;
 
     background-color: transparent;
     text-color:       @fg0;
+
+    /* Animation timing */
+    transition: 200ms;
 }
 
 window {
     background-color: @bg0;
     border:           2px solid;
-    border-color:     rgba(0, 255, 0, 0.3);
-    border-radius:    0px;
-    width:            600px;
+    border-color:     rgba(0, 255, 0, 0.4);
+    border-radius:    8px;
+    width:            650px;
     padding:          0px;
+    box-shadow:       0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 0, 0.1);
 }
 
 mainbox {
     background-color: transparent;
-    children:         [ inputbar, message, listview ];
+    children:         [ inputbar, message, listview, mode-switcher ];
     spacing:          0px;
 }
 
@@ -76,10 +89,12 @@ textbox {
 listview {
     background-color: transparent;
     columns:          1;
-    lines:            8;
+    lines:            10;
     padding:          8px 0;
     scrollbar:        true;
-    spacing:          0px;
+    spacing:          2px;
+    fixed-height:     true;
+    cycle:            true;
 }
 
 scrollbar {
@@ -155,4 +170,61 @@ element-text {
     background-color: transparent;
     text-color:       inherit;
     vertical-align:   0.5;
+}
+
+/* ===== MODE SWITCHER ===== */
+mode-switcher {
+    background-color: transparent;
+    border:           2px 0 0 0;
+    border-color:     rgba(0, 255, 0, 0.2);
+    padding:          8px;
+    spacing:          8px;
+}
+
+button {
+    background-color: @bg1;
+    text-color:       @fg2;
+    padding:          8px 16px;
+    border-radius:    4px;
+    border:           1px solid transparent;
+    cursor:           pointer;
+}
+
+button:hover {
+    background-color: @bg2;
+    text-color:       @fg0;
+    border-color:     rgba(0, 255, 0, 0.3);
+}
+
+button selected {
+    background-color: @bg3;
+    text-color:       @accent;
+    border:           1px solid @accent;
+    font-weight:      bold;
+}
+
+/* ===== ERROR MESSAGE ===== */
+error-message {
+    background-color: rgba(255, 51, 51, 0.15);
+    border:           2px solid @urgent;
+    border-radius:    8px;
+    padding:          16px;
+}
+
+error-message textbox {
+    text-color:       @urgent;
+}
+
+/* ===== NUM FILTERED / RESULTS ===== */
+num-filtered-rows, num-rows {
+    text-color:       @fg3;
+    font-style:       italic;
+}
+
+/* ===== TEXTBOX (calc mode etc) ===== */
+textbox-current-entry {
+    background-color: @bg2;
+    text-color:       @accent;
+    padding:          12px;
+    border-radius:    4px;
 }

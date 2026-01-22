@@ -17,7 +17,7 @@
     background_darkness = 0.95
     background_type = transparent
     font = Dank Mono 10
-    foreground_color = "#34ea07"
+    foreground_color = "#00ff00"
     scrollbar_position = hidden
     scrollback_infinite = True
     palette = "#2e3440:#bf616a:#a3be8c:#ebcb8b:#81a1c1:#b48ead:#88c0d0:#e5e9f0:#4c566a:#d08770:#8fbcbb:#d8dee9:#5e81ac:#eceff4:#93e5cc:#ffffff"

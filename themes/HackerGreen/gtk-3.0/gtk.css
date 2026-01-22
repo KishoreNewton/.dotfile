@@ -23,8 +23,10 @@
 /* ===== GLOBAL STYLES ===== */
 * {
     -gtk-icon-style: symbolic;
+    -gtk-icon-palette: success @accent_color, warning @warning_color, error @error_color;
     outline-style: none;
     outline-width: 0;
+    font-family: "JetBrains Mono", "Fira Code", "Cantarell", sans-serif;
 }
 
 /* ===== WINDOW ===== */
@@ -510,8 +512,8 @@ notebook header tabs {
 notebook tab {
     background: transparent;
     border: none;
-    padding: 2px 10px;
-    min-height: 16px;
+    padding: 1px 8px;
+    min-height: 12px;
     color: @fg_dim;
     transition: all 0.2s ease;
 }
@@ -586,6 +588,90 @@ dropdown button {
 
 dropdown button:focus {
     border-color: @accent_color;
+}
+
+/* ===== AUTOCOMPLETE / COMPLETION ===== */
+.autocomplete-popup, .completion-popup {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.autocomplete-popup row,
+.completion-popup row {
+    padding: 6px 10px;
+    color: @fg_color;
+}
+
+.autocomplete-popup row:hover,
+.completion-popup row:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.autocomplete-popup row:selected,
+.completion-popup row:selected {
+    background: @accent_color;
+    color: #000000;
+}
+
+/* Entry completion dropdown */
+entry completion {
+    background: @bg_dark;
+}
+
+GtkEntryCompletion {
+    background: @bg_dark;
+}
+
+/* Dropdown/Popover list */
+dropdown popover, combobox popover {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+}
+
+dropdown popover listview,
+combobox popover listview {
+    background: @bg_dark;
+}
+
+dropdown popover row,
+combobox popover row {
+    padding: 8px 12px;
+    color: @fg_color;
+    border-radius: 4px;
+    margin: 2px 4px;
+}
+
+dropdown popover row:hover,
+combobox popover row:hover {
+    background: rgba(0, 255, 0, 0.1);
+    color: @accent_color;
+}
+
+dropdown popover row:selected,
+combobox popover row:selected {
+    background: @accent_color;
+    color: #000000;
+}
+
+/* Listbox in popovers */
+popover listbox {
+    background: @bg_dark;
+}
+
+popover listbox row {
+    padding: 6px 10px;
+    color: @fg_color;
+}
+
+popover listbox row:hover {
+    background: rgba(0, 255, 0, 0.08);
+}
+
+popover listbox row:selected {
+    background: @selection_color;
+    color: @accent_color;
 }
 
 /* ===== TREEVIEW ===== */
@@ -818,6 +904,231 @@ searchbar entry {
     animation: pulse-glow 2s ease-in-out infinite;
 }
 
+/* ===== STACK SWITCHER ===== */
+stackswitcher {
+    background: @bg_dark;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+stackswitcher button {
+    padding: 4px 12px;
+    margin: 2px;
+    border-radius: 4px;
+    background: transparent;
+    border: none;
+    color: @fg_dim;
+    transition: all 0.2s ease;
+}
+
+stackswitcher button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    color: @fg_color;
+}
+
+stackswitcher button:checked {
+    background: @selection_color;
+    color: @accent_color;
+    box-shadow: 0 0 8px @accent_glow;
+}
+
+/* ===== ACTION BAR ===== */
+actionbar {
+    background: @bg_dark;
+    border-top: 1px solid @border_color;
+    padding: 4px 6px;
+}
+
+actionbar > revealer > box {
+    padding: 4px;
+}
+
+actionbar button {
+    padding: 4px 10px;
+}
+
+/* ===== FLOW BOX ===== */
+flowbox {
+    background: @bg_color;
+}
+
+flowbox flowboxchild {
+    padding: 4px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+
+flowbox flowboxchild:hover {
+    background: rgba(0, 255, 0, 0.05);
+}
+
+flowbox flowboxchild:selected {
+    background: @selection_color;
+    border: 1px solid @accent_color;
+}
+
+/* ===== BACKDROP STATES (unfocused window) ===== */
+window:backdrop {
+    background-color: shade(@bg_color, 0.95);
+}
+
+window:backdrop headerbar {
+    background: linear-gradient(180deg, #101015 0%, #080810 100%);
+}
+
+window:backdrop headerbar .title {
+    color: @fg_dim;
+    text-shadow: none;
+}
+
+window:backdrop button {
+    color: @fg_dim;
+}
+
+window:backdrop entry {
+    border-color: rgba(0, 255, 0, 0.1);
+}
+
+window:backdrop label {
+    color: shade(@fg_color, 0.8);
+}
+
+window:backdrop .sidebar {
+    background: shade(@bg_dark, 0.95);
+}
+
+window:backdrop row:selected {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+window:backdrop scrollbar slider {
+    background: linear-gradient(180deg, #222230 0%, #181825 100%);
+}
+
+window:backdrop switch:checked {
+    background: linear-gradient(90deg, #00aa00 0%, #00cc00 100%);
+    box-shadow: none;
+}
+
+window:backdrop progressbar progress {
+    box-shadow: none;
+}
+
+/* ===== HEADER BAR SUBTITLE ===== */
+headerbar .subtitle {
+    font-size: 0.8em;
+    color: @fg_dim;
+}
+
+/* ===== PLACEHOLDER TEXT ===== */
+entry placeholder {
+    color: @fg_dim;
+    font-style: italic;
+}
+
+/* ===== LINKED BUTTONS ===== */
+.linked > button {
+    border-radius: 0;
+    border-right-width: 0;
+}
+
+.linked > button:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+.linked > button:last-child {
+    border-radius: 0 6px 6px 0;
+    border-right-width: 1px;
+}
+
+.linked > button:only-child {
+    border-radius: 6px;
+    border-right-width: 1px;
+}
+
+/* ===== CIRCULAR BUTTONS ===== */
+button.circular {
+    border-radius: 50%;
+    padding: 8px;
+    min-width: 32px;
+    min-height: 32px;
+}
+
+/* ===== IMAGE BUTTONS ===== */
+button.image-button {
+    padding: 6px;
+    min-width: 24px;
+    min-height: 24px;
+}
+
+/* ===== TITLE BUTTONS ===== */
+windowcontrols > button {
+    min-width: 12px;
+    min-height: 12px;
+    padding: 2px;
+}
+
+/* ===== VIEW (icon/list view) ===== */
+.view {
+    background-color: @bg_color;
+    color: @fg_color;
+}
+
+.view:selected {
+    background-color: @selection_color;
+    color: @accent_color;
+}
+
+.view:hover {
+    background-color: rgba(0, 255, 0, 0.03);
+}
+
+iconview {
+    background-color: @bg_color;
+}
+
+iconview:selected {
+    background-color: @selection_color;
+}
+
+/* ===== PANED (split view) ===== */
+paned > separator {
+    background-color: @border_color;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+paned > separator:hover {
+    background-color: @accent_color;
+}
+
+/* ===== BANNER / APP NOTIFICATION ===== */
+.app-notification {
+    background: @bg_light;
+    border: 1px solid @border_color;
+    border-radius: 0 0 8px 8px;
+    padding: 8px;
+}
+
+/* ===== EMOJI PICKER ===== */
+.emoji-picker {
+    background: @bg_color;
+}
+
+.emoji-picker entry {
+    background: @bg_dark;
+}
+
+/* ===== COLOR CHOOSER ===== */
+colorswatch {
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+colorswatch:selected {
+    box-shadow: 0 0 0 2px @accent_color;
+}
+
 /* ===== APP SPECIFIC FIXES ===== */
 /* Firefox */
 #MozillaGtkWidget > widget > * {
@@ -827,4 +1138,814 @@ searchbar entry {
 /* Chromium */
 .chromium {
     background-color: @bg_color;
+}
+
+/* GNOME Software */
+.application-details-infobar {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+}
+
+/* GNOME Files / Nautilus */
+.nautilus-list-view .view {
+    background-color: @bg_color;
+}
+
+.nautilus-canvas-item {
+    border-radius: 6px;
+}
+
+.nautilus-canvas-item:selected {
+    background-color: @selection_color;
+}
+
+/* Disk Usage Analyzer */
+.cell {
+    background-color: @accent_color;
+}
+
+/* Evince / Document Viewer */
+evview {
+    background-color: @bg_dark;
+}
+
+/* ===== INDETERMINATE STATES ===== */
+check:indeterminate {
+    background: linear-gradient(135deg, @accent_color 0%, @accent_dim 100%);
+    border-color: @accent_color;
+}
+
+check:indeterminate:hover {
+    background: @accent_color;
+    box-shadow: 0 0 10px @accent_glow;
+}
+
+radio:indeterminate {
+    background: radial-gradient(circle, @accent_color 30%, @bg_dark 30%);
+    border-color: @accent_color;
+}
+
+progressbar.horizontal progress:indeterminate {
+    background: linear-gradient(90deg,
+        transparent 0%,
+        @accent_color 30%,
+        @accent_color 70%,
+        transparent 100%);
+    animation: progress-indeterminate 1.5s linear infinite;
+}
+
+progressbar.vertical progress:indeterminate {
+    background: linear-gradient(180deg,
+        transparent 0%,
+        @accent_color 30%,
+        @accent_color 70%,
+        transparent 100%);
+    animation: progress-indeterminate-vertical 1.5s linear infinite;
+}
+
+@keyframes progress-indeterminate {
+    0% { margin-left: -30%; margin-right: 100%; }
+    50% { margin-left: 30%; margin-right: 30%; }
+    100% { margin-left: 100%; margin-right: -30%; }
+}
+
+@keyframes progress-indeterminate-vertical {
+    0% { margin-top: -30%; margin-bottom: 100%; }
+    50% { margin-top: 30%; margin-bottom: 30%; }
+    100% { margin-top: 100%; margin-bottom: -30%; }
+}
+
+/* Inconsistent state */
+check:inconsistent {
+    background: @bg_dark;
+    border-color: @accent_color;
+}
+
+check:inconsistent::after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 2px;
+    background: @accent_color;
+}
+
+/* ===== FOCUS VISIBLE (Keyboard Navigation) ===== */
+*:focus-visible {
+    outline: 2px solid @accent_color;
+    outline-offset: 2px;
+}
+
+button:focus-visible {
+    outline: 2px solid @accent_color;
+    outline-offset: 2px;
+    box-shadow: 0 0 12px @accent_glow;
+}
+
+entry:focus-visible {
+    border-color: @accent_color;
+    box-shadow: 0 0 15px @accent_glow, 0 0 0 2px rgba(0, 255, 0, 0.2);
+}
+
+row:focus-visible {
+    outline: 2px solid @accent_color;
+    outline-offset: -2px;
+    background: rgba(0, 255, 0, 0.08);
+}
+
+switch:focus-visible {
+    outline: 2px solid @accent_color;
+    outline-offset: 3px;
+}
+
+check:focus-visible, radio:focus-visible {
+    outline: 2px solid @accent_color;
+    outline-offset: 2px;
+}
+
+notebook tab:focus-visible {
+    outline: 2px solid @accent_color;
+    outline-offset: -2px;
+    border-radius: 4px;
+}
+
+/* ===== RUBBERBAND SELECTION ===== */
+rubberband, .rubberband {
+    background-color: rgba(0, 255, 0, 0.15);
+    border: 1px solid @accent_color;
+    border-radius: 2px;
+}
+
+.view rubberband {
+    background-color: rgba(0, 255, 0, 0.2);
+    border: 1px solid @accent_color;
+}
+
+flowbox rubberband {
+    background-color: rgba(0, 255, 0, 0.15);
+    border: 1px solid @accent_color;
+}
+
+treeview.view rubberband {
+    background-color: rgba(0, 255, 0, 0.15);
+    border: 1px solid @accent_color;
+}
+
+/* ===== DRAG AND DROP ===== */
+.dnd {
+    border: 2px dashed @accent_color;
+    border-radius: 6px;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+row.drag-icon {
+    background: @bg_dark;
+    border: 1px solid @accent_color;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+row.drag-row {
+    opacity: 0.5;
+}
+
+row:drop(active) {
+    border: 2px solid @accent_color;
+    background: rgba(0, 255, 0, 0.1);
+    box-shadow: inset 0 0 10px @accent_glow;
+}
+
+row:drop(active).before {
+    border-top: 2px solid @accent_color;
+}
+
+row:drop(active).after {
+    border-bottom: 2px solid @accent_color;
+}
+
+.view:drop(active) {
+    border: 2px dashed @accent_color;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+/* Drag hover */
+*:drop(active):focus,
+*:drop(active) {
+    box-shadow: inset 0 0 0 2px @accent_color;
+}
+
+/* ===== SCROLLED WINDOW OVERSHOOT ===== */
+scrolledwindow overshoot {
+    background: none;
+}
+
+scrolledwindow overshoot.top {
+    background: linear-gradient(to bottom,
+        rgba(0, 255, 0, 0.2) 0%,
+        transparent 100%);
+}
+
+scrolledwindow overshoot.bottom {
+    background: linear-gradient(to top,
+        rgba(0, 255, 0, 0.2) 0%,
+        transparent 100%);
+}
+
+scrolledwindow overshoot.left {
+    background: linear-gradient(to right,
+        rgba(0, 255, 0, 0.2) 0%,
+        transparent 100%);
+}
+
+scrolledwindow overshoot.right {
+    background: linear-gradient(to left,
+        rgba(0, 255, 0, 0.2) 0%,
+        transparent 100%);
+}
+
+scrolledwindow undershoot.top {
+    background: linear-gradient(to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        transparent 100%);
+}
+
+scrolledwindow undershoot.bottom {
+    background: linear-gradient(to top,
+        rgba(0, 0, 0, 0.3) 0%,
+        transparent 100%);
+}
+
+scrolledwindow undershoot.left {
+    background: linear-gradient(to right,
+        rgba(0, 0, 0, 0.3) 0%,
+        transparent 100%);
+}
+
+scrolledwindow undershoot.right {
+    background: linear-gradient(to left,
+        rgba(0, 0, 0, 0.3) 0%,
+        transparent 100%);
+}
+
+/* ===== SPINNER ===== */
+spinner {
+    color: @accent_color;
+    opacity: 0;
+    -gtk-icon-source: -gtk-icontheme("process-working-symbolic");
+}
+
+spinner:checked {
+    opacity: 1;
+    animation: spinner-spin 1s linear infinite;
+}
+
+@keyframes spinner-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== TOOLBAR ===== */
+toolbar, .toolbar {
+    background: @bg_dark;
+    border-bottom: 1px solid @border_color;
+    padding: 4px;
+}
+
+toolbar button, .toolbar button {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+toolbar button:hover, .toolbar button:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+toolbar button:checked, .toolbar button:checked {
+    background: @selection_color;
+    color: @accent_color;
+}
+
+toolbar separator, .toolbar separator {
+    background: @border_color;
+    margin: 4px 6px;
+}
+
+/* Primary toolbar */
+.primary-toolbar {
+    background: linear-gradient(180deg, #151520 0%, #0a0a0f 100%);
+}
+
+/* Inline toolbar */
+.inline-toolbar {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 0 0 6px 6px;
+    padding: 4px;
+}
+
+/* ===== FILE CHOOSER DIALOG ===== */
+filechooser {
+    background: @bg_color;
+}
+
+filechooser .path-bar {
+    background: @bg_dark;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+filechooser .path-bar button {
+    padding: 4px 8px;
+    margin: 2px;
+}
+
+filechooser placessidebar {
+    background: @bg_dark;
+}
+
+filechooser placessidebar row {
+    padding: 6px 12px;
+}
+
+filechooser placessidebar row:selected {
+    background: @selection_color;
+}
+
+filechooser placessidebar row image {
+    color: @accent_color;
+}
+
+filechooser .view {
+    background: @bg_color;
+}
+
+filechooser actionbar {
+    background: @bg_dark;
+    border-top: 1px solid @border_color;
+}
+
+/* Places sidebar */
+placessidebar {
+    background: @bg_dark;
+}
+
+placessidebar row {
+    padding: 8px 12px;
+    border-radius: 0;
+}
+
+placessidebar row:selected {
+    background: @selection_color;
+}
+
+placessidebar row image.sidebar-icon {
+    color: @accent_color;
+}
+
+placessidebar row label.sidebar-label {
+    color: @fg_color;
+}
+
+placessidebar row:selected label.sidebar-label {
+    color: @accent_color;
+}
+
+placessidebar row.sidebar-placeholder-row {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px dashed @accent_color;
+}
+
+placessidebar row.sidebar-new-bookmark-row {
+    color: @accent_color;
+}
+
+/* ===== PRINT DIALOG ===== */
+printdialog {
+    background: @bg_color;
+}
+
+printdialog paper {
+    background: #ffffff;
+    border: 1px solid @border_color;
+    color: #000000;
+}
+
+printdialog .dialog-action-box {
+    background: @bg_dark;
+    border-top: 1px solid @border_color;
+}
+
+/* ===== FONT CHOOSER ===== */
+fontchooser {
+    background: @bg_color;
+}
+
+fontchooser .view {
+    background: @bg_color;
+}
+
+fontchooser .view:selected {
+    background: @selection_color;
+}
+
+fontchooser list {
+    background: @bg_color;
+}
+
+fontchooser entry {
+    background: @bg_dark;
+}
+
+/* Font preview */
+fontchooser .preview-text {
+    background: @bg_dark;
+    padding: 16px;
+    border: 1px solid @border_color;
+    border-radius: 6px;
+}
+
+/* ===== COLOR CHOOSER DIALOG ===== */
+colorchooser {
+    background: @bg_color;
+}
+
+colorchooser colorswatch {
+    border-radius: 4px;
+    border: 1px solid @border_color;
+}
+
+colorchooser colorswatch:selected {
+    border: 2px solid @accent_color;
+    box-shadow: 0 0 8px @accent_glow;
+}
+
+colorchooser colorswatch.dark:selected {
+    border-color: @accent_color;
+}
+
+colorchooser colorswatch.light:selected {
+    border-color: @accent_color;
+}
+
+colorchooser .color-editor {
+    padding: 8px;
+}
+
+colorchooser .color-editor entry {
+    background: @bg_dark;
+}
+
+colorchooser #add-color-button {
+    background: @bg_dark;
+    border: 2px dashed @border_color;
+    color: @fg_dim;
+}
+
+colorchooser #add-color-button:hover {
+    border-color: @accent_color;
+    color: @accent_color;
+}
+
+/* ===== ABOUT DIALOG ===== */
+aboutdialog, window.aboutdialog {
+    background: @bg_color;
+}
+
+aboutdialog .titlebar {
+    background: @bg_dark;
+}
+
+aboutdialog .main-logo {
+    padding: 16px;
+}
+
+aboutdialog .title {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: @accent_color;
+}
+
+aboutdialog .version {
+    color: @fg_dim;
+    font-size: 0.9em;
+}
+
+aboutdialog .credits {
+    background: @bg_dark;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+aboutdialog .license {
+    background: @bg_dark;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+/* ===== SHORTCUTS WINDOW ===== */
+shortcuts-window, .shortcuts-window {
+    background: @bg_color;
+}
+
+shortcuts-window .search-bar {
+    background: @bg_dark;
+    border-bottom: 1px solid @border_color;
+}
+
+shortcuts-window searchbar {
+    background: @bg_dark;
+}
+
+shortcuts-section {
+    padding: 12px;
+}
+
+shortcuts-group {
+    padding: 8px 0;
+}
+
+shortcuts-group > label {
+    font-weight: bold;
+    color: @accent_color;
+    padding: 8px 0;
+}
+
+shortcuts-shortcut {
+    padding: 4px 0;
+}
+
+shortcut > label {
+    color: @fg_color;
+}
+
+shortcut > box > label.keycap {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: monospace;
+    color: @accent_color;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== ASSISTANT (Wizard) ===== */
+assistant {
+    background: @bg_color;
+}
+
+assistant .sidebar {
+    background: @bg_dark;
+    border-right: 1px solid @border_color;
+}
+
+assistant .sidebar label {
+    padding: 8px 16px;
+    color: @fg_dim;
+}
+
+assistant .sidebar label.highlight {
+    color: @accent_color;
+    font-weight: bold;
+}
+
+assistant headerbar {
+    background: @bg_dark;
+}
+
+assistant .content {
+    background: @bg_color;
+    padding: 16px;
+}
+
+assistant actionbar {
+    background: @bg_dark;
+    border-top: 1px solid @border_color;
+}
+
+/* ===== MESSAGE DIALOG ===== */
+messagedialog {
+    background: @bg_color;
+}
+
+messagedialog .message-area {
+    padding: 16px;
+}
+
+messagedialog .message-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: @fg_color;
+}
+
+messagedialog .message-body {
+    color: @fg_dim;
+}
+
+messagedialog .dialog-action-area {
+    background: @bg_dark;
+    border-top: 1px solid @border_color;
+    padding: 8px;
+}
+
+messagedialog .dialog-action-area button {
+    margin: 4px;
+}
+
+/* ===== TEXT SELECTION IN LABELS ===== */
+label selection {
+    background-color: @selection_color;
+    color: @accent_color;
+}
+
+/* ===== CURSOR HANDLES (touch/text selection) ===== */
+cursor-handle {
+    background-color: @accent_color;
+    border-radius: 50%;
+}
+
+cursor-handle.insertion-cursor {
+    background-color: @accent_color;
+}
+
+cursor-handle.top, cursor-handle.bottom {
+    background-color: @accent_color;
+    border: 2px solid @bg_color;
+}
+
+/* ===== TOUCH SELECTION POPUP ===== */
+.touch-selection {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.touch-selection button {
+    padding: 8px 12px;
+}
+
+/* ===== CONTEXT MENU ===== */
+.context-menu {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+/* ===== EMOJI COMPLETION ===== */
+.emoji-completion {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.emoji-completion row {
+    padding: 4px 8px;
+}
+
+.emoji-completion row:selected {
+    background: @selection_color;
+}
+
+/* ===== PLACEHOLDER ===== */
+.placeholder {
+    color: @fg_dim;
+    font-size: 1.5em;
+}
+
+.large-icons .placeholder {
+    color: @fg_dim;
+}
+
+/* ===== CONTENT VIEW ICONS ===== */
+.content-view {
+    background: @bg_color;
+}
+
+.content-view.icon {
+    color: @fg_color;
+}
+
+.content-view.cell:selected {
+    background: @selection_color;
+    border-radius: 8px;
+}
+
+/* ===== GRANITE WIDGETS (Elementary apps) ===== */
+.source-list {
+    background: @bg_dark;
+}
+
+.source-list row {
+    padding: 6px 12px;
+}
+
+.source-list row:selected {
+    background: @selection_color;
+}
+
+/* ===== WAYLAND POPUPS ===== */
+.csd popup {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    border-radius: 8px;
+}
+
+/* ===== MODEL BUTTON (menu items) ===== */
+modelbutton {
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: @fg_color;
+    transition: all 0.15s ease;
+}
+
+modelbutton:hover {
+    background: rgba(0, 255, 0, 0.1);
+    color: @accent_color;
+}
+
+modelbutton:selected {
+    background: @selection_color;
+    color: @accent_color;
+}
+
+modelbutton.flat {
+    background: transparent;
+}
+
+modelbutton arrow {
+    color: @accent_color;
+}
+
+/* Arrow for submenus */
+modelbutton arrow.right {
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+}
+
+modelbutton arrow.left {
+    -gtk-icon-source: -gtk-icontheme("pan-start-symbolic");
+}
+
+/* ===== ADDITIONAL APP FIXES ===== */
+/* GNOME Settings */
+.settings-sidebar {
+    background: @bg_dark;
+}
+
+/* GNOME Calculator */
+.history-view {
+    background: @bg_dark;
+}
+
+.math-buttons button {
+    background: @bg_dark;
+    border: 1px solid @border_color;
+    font-size: 1.2em;
+    min-height: 40px;
+}
+
+.math-buttons button:hover {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.math-buttons button.suggested-action {
+    background: @accent_color;
+    color: #000000;
+}
+
+/* GNOME Text Editor / Gedit */
+.gedit-side-panel-paned {
+    background: @bg_color;
+}
+
+.open-document-selector-path-label {
+    color: @fg_dim;
+    font-size: 0.9em;
+}
+
+/* GNOME Terminal */
+terminal-window notebook header {
+    background: @bg_dark;
+}
+
+/* Tilix terminal */
+.tilix-terminal {
+    background: @bg_dark;
+}
+
+/* GNOME Disks */
+.gnome-disk-utility-partition {
+    border-radius: 4px;
+}
+
+/* Boxes */
+.boxes-icon {
+    background: @bg_dark;
+    border-radius: 8px;
+}
+
+/* Polari / IRC */
+.polari-room-list row:selected {
+    background: @selection_color;
 }

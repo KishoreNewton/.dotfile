@@ -9,12 +9,18 @@ endif
 let g:colors_name = "hackertheme"
 " Hacker Theme Color Scheme 
 "
-" Popup Menu
+" Popup Menu / Autocomplete
 hi Visual term=none cterm=none guibg=#FFFFFF  guifg=#000000
-highlight Pmenu guibg=#3C3C60 guifg=#FFFFFF
-highlight PmenuSel guibg=#5C5C80 guifg=#FFFFFF
+highlight Pmenu guibg=#0a0a0f guifg=#e0e0e0
+highlight PmenuSel guibg=#00ff00 guifg=#000000 gui=bold
+highlight PmenuSbar guibg=#151520
+highlight PmenuThumb guibg=#00ff00
+
+" Float Window
+highlight NormalFloat guibg=#0a0a0f guifg=#e0e0e0
+highlight FloatBorder guifg=#00ff00 guibg=#0a0a0f
 " General Text
-highlight Normal guifg=#53cd38
+highlight Normal guifg=#00ff00
 highlight Comment guifg=#D1D1D1 gui=italic
 highlight String guifg=#FFF066
 " Syntax Elements
@@ -45,7 +51,7 @@ highlight TabLineFill guifg=#111111 guibg=#000000 ctermfg=254 ctermbg=238
 " LSP Colors
 " hi @lsp.type.function guifg=Yellow
 " hi @lsp.type.variable.lua guifg=Green
-hi @lsp.type.variable guifg=#32CD32
+hi @lsp.type.variable guifg=#00ff00
 " hi @lsp.mod.deprecated gui=strikethrough
 " hi @lsp.typemod.function.async guifg=#FF0000
 " Spell Checking
